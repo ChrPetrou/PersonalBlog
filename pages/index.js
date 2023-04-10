@@ -8,6 +8,8 @@ import { useState } from "react";
 import Link from "next/link";
 import colors from "configs/colors";
 import blogsService from "backend/services/blog.service";
+import Lottie from "components/common/Lottie";
+import Cookie from "../public/animations/cookie.json";
 
 const Container = styled.div`
   display: flex;
@@ -37,23 +39,6 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const Button = styled(Link)`
-  display: flex;
-  justify-content: center;
-  border: 1px solid ${colors.purble};
-  padding: 10px;
-  border-radius: 8px;
-  width: 200px;
-  text-decoration: none;
-  color: ${colors.purble};
-  transition: all 0.2s linear;
-  :hover {
-    background: ${colors.purble};
-    color: ${colors.white};
-  }
-  /* width: 100%; */
-`;
-
 const LoadMore = styled.div`
   display: flex;
   justify-content: center;
@@ -68,7 +53,7 @@ const LoadMore = styled.div`
   transition: all 0.2s linear;
   :hover {
     background: ${({ canLoad }) => (canLoad ? colors.purble : "")};
-    color: ${colors.white};
+    color: ${({ canLoad }) => (canLoad ? colors.white : "")};
   }
 `;
 
@@ -76,9 +61,11 @@ export default function Home({ allBlogs, pagesNumber }) {
   const [isList, setIsList] = useState(false);
   const [blogs, setBlogs] = useState(allBlogs);
   const [currPage, setCurrPage] = useState(0);
+  const [isloading, setIsLoading] = useState(false);
 
   const loadMore = async () => {
     setCurrPage(currPage + 1);
+    setIsLoading(true);
     if (pagesNumber[currPage + 1]) {
       const environmentUrl = process.env.NEXT_PUBLIC_ENVIRONMENT_URL;
       const extaBlogs = await axios
@@ -86,10 +73,15 @@ export default function Home({ allBlogs, pagesNumber }) {
           blogLimitStart: pagesNumber[currPage + 1] * 6 - 6,
           blogLimiteEnd: pagesNumber[currPage + 1] * 6,
         })
-        .then((res) => res.data)
-        .catch((err) => console.log(err));
+        .then((res) => {
+          setIsLoading(false);
+          return res.data;
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.log(err);
+        });
       setBlogs((prevState) => [...prevState, ...extaBlogs]);
-      console.log(extaBlogs);
     }
   };
 
@@ -98,12 +90,27 @@ export default function Home({ allBlogs, pagesNumber }) {
       <AuthorIntro setIsList={setIsList} isList={isList} />
       <h1>Projects:{currPage[0]}</h1>
       <CardItemsContainer>
-        {blogs?.map((curr, index) =>
-          !isList ? (
-            <CardItem key={index} curr={curr} />
-          ) : (
-            <CardListItem key={index} curr={curr} />
-          )
+        {isloading ? (
+          <Lottie
+            animationData={Cookie}
+            loop={true}
+            autoPlay={true}
+            style={{
+              margin: "auto",
+              height: 80,
+              width: 80,
+            }}
+          />
+        ) : (
+          <>
+            {blogs?.map((curr, index) =>
+              !isList ? (
+                <CardItem key={index} curr={curr} />
+              ) : (
+                <CardListItem key={index} curr={curr} />
+              )
+            )}
+          </>
         )}
         <ButtonContainer mWidth={isList}>
           <LoadMore

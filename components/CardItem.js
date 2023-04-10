@@ -166,8 +166,10 @@ const CardDetailsImg = styled.div`
   display: flex;
   z-index: 2;
   width: 100%;
+  max-height: 200px;
   img {
-    object-fit: contain;
+    object-fit: cover;
+    object-position: bottom;
     width: 100%;
     height: 100%;
   }

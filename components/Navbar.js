@@ -8,6 +8,9 @@ const Navbar = styled.div`
   position: sticky;
   top: 0;
   z-index: 20;
+  backdrop-filter: blur(5px);
+
+  background: #f1f2f454;
 `;
 
 const NavbarInner = styled.div`
@@ -15,7 +18,8 @@ const NavbarInner = styled.div`
   margin: auto;
 
   z-index: 20;
-  background: ${colors.lightgrey};
+  /* */
+
   top: 0;
   width: 100%;
   max-width: 1200px;
