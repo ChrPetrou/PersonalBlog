@@ -226,7 +226,7 @@ export default slug;
 
 export async function getStaticPaths(context) {
   const paths = await axios
-    .get(`${process.env.NEXT_ENVIROMENT_URL}/blogs/getAllBlogsSlugs`)
+    .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
     .then((res) => res.data)
     .catch((err) => console.log(err));
   return {
@@ -241,7 +241,7 @@ export async function getStaticProps(context) {
   const { slug = "" } = context.params;
 
   const blogData = await axios
-    .post(`${process.env.NEXT_ENVIROMENT_URL}/blogs/getBlogBySlug`, {
+    .post(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getBlogBySlug`, {
       slug,
     })
     .then((res) => res.data);

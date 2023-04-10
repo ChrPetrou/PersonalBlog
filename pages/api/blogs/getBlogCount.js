@@ -1,11 +1,12 @@
 const sanityClient = require("@sanity/client");
 import { sanityConfig } from "configs/sanityConfig";
+import { resolve } from "styled-jsx/css";
 
 export default function handler(req, res) {
   return new Promise((resolve, reject) => {
     const client = sanityClient(sanityConfig);
-    const { blogLimitStart, blogLimiteEnd } = req.body;
-    const query = `*[_type == "blog"] | order(date desc)[$blogLimitStart...$blogLimiteEnd]{
+
+    const query = `*[_type == "blog"] | order(date){
       "createAt":_createdAt,
         "slug":slug.current,
         "title":title,
@@ -28,9 +29,16 @@ export default function handler(req, res) {
     }`;
 
     client
-      .fetch(query, { blogLimitStart, blogLimiteEnd })
+      .fetch(query)
       .then((data) => {
-        res.status(200).json(data);
+        //Caluclate number of pages
+        const numberOfPages = Math.ceil(data.length / 6);
+        //create an array of page numbers
+        const pageNumbersArray = Array.from(
+          { length: numberOfPages },
+          (e, i) => i + 1
+        );
+        res.status(200).json(pageNumbersArray);
         resolve();
       })
       .catch((err) => {

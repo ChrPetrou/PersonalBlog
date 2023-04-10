@@ -108,6 +108,7 @@ const CardDepth = styled(Link)`
 
 const CardHeader = styled.div`
   display: flex;
+  align-content: flex-start;
   flex-wrap: wrap;
   z-index: 2;
   width: 100%;
