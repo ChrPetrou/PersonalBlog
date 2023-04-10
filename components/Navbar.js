@@ -49,7 +49,7 @@ const BlogNavbar = () => {
   return (
     <Navbar>
       <NavbarInner>
-        <h1>Chris-Petrou</h1>
+        <h1>Personal-Blog</h1>
         {asPath !== "/" ? (
           <Link href={"/"}>
             <h2>Home</h2>

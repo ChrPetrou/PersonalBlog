@@ -9,7 +9,7 @@ import Link from "next/link";
 import colors from "configs/colors";
 import blogsService from "backend/services/blog.service";
 import Lottie from "components/common/Lottie";
-import Cookie from "../public/animations/cookie.json";
+import Loading from "../public/animations/loading.json";
 
 const Container = styled.div`
   display: flex;
@@ -70,8 +70,8 @@ export default function Home({ allBlogs, pagesNumber }) {
       const environmentUrl = process.env.NEXT_PUBLIC_ENVIRONMENT_URL;
       const extaBlogs = await axios
         .post(`${environmentUrl}/blogs/getAllBlogs`, {
-          blogLimitStart: pagesNumber[currPage + 1] * 6 - 6,
-          blogLimiteEnd: pagesNumber[currPage + 1] * 6,
+          blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
+          blogLimiteEnd: pagesNumber[currPage + 1] * 3,
         })
         .then((res) => {
           setIsLoading(false);
@@ -92,7 +92,7 @@ export default function Home({ allBlogs, pagesNumber }) {
       <CardItemsContainer>
         {isloading ? (
           <Lottie
-            animationData={Cookie}
+            animationData={Loading}
             loop={true}
             autoPlay={true}
             style={{
@@ -117,7 +117,7 @@ export default function Home({ allBlogs, pagesNumber }) {
             canLoad={pagesNumber[currPage + 1]}
             onClick={() => pagesNumber[currPage + 1] && loadMore()}
           >
-            <p>Load More</p>
+            <p>More Blogs</p>
           </LoadMore>
         </ButtonContainer>
       </CardItemsContainer>
@@ -132,7 +132,7 @@ export async function getStaticProps(context) {
   const allBlogs = await axios
     .post(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogs`, {
       blogLimitStart: 0,
-      blogLimiteEnd: 6,
+      blogLimiteEnd: 3,
     })
     .then((res) => res.data)
     .catch((err) => console.log(err));

@@ -299,7 +299,6 @@ const CardItem = ({ curr }) => {
                   clamp(yAxis, 0, refContainer.current.clientWidth, -15, 15) *
                   -1, // Math.max(e.nativeEvent.offsetY, 456)) / 10,
               }));
-              console.log(mousePosition);
             }}
           />
         </Link>

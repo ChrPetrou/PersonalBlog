@@ -96,7 +96,7 @@ const blogsService = {
       .fetch(query)
       .then((data) => {
         //Caluclate number of pages
-        const numberOfPages = Math.ceil(data.length / 6);
+        const numberOfPages = Math.ceil(data.length / 3);
         //create an array of page numbers
         const pageNumbersArray = Array.from(
           { length: numberOfPages },
