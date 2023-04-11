@@ -127,7 +127,6 @@ export default function Home({ allBlogs, pagesNumber }) {
 
 export async function getStaticProps(context) {
   const pagesNumber = await blogsService.getBlogCount();
-  console.log(pagesNumber);
 
   const allBlogs = await axios
     .post(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogs`, {

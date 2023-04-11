@@ -4,7 +4,6 @@ import { sanityConfig } from "configs/sanityConfig";
 export const imageBuilder = createImageUrlBuilder(sanityConfig);
 
 export const urlForImage = (source) => {
-  // console.log(imageBuilder.image(source));
   return imageBuilder.image(source).auto("format").fit("max");
 };
 
