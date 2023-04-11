@@ -1,16 +1,36 @@
 import colors from "configs/colors";
 import Head from "next/head";
+import ThemeProvider, { useTheme } from "providers/ThemeProvider";
 import React from "react";
 import styled from "styled-components";
 import GernericContainer from "./GernericContainer";
-// import { Container } from "react-bootstrap";
 import Navbar from "./Navbar";
 
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
   position: relative;
-  background: ${colors.lightgrey};
+
+  &.light {
+    background: ${colors.lightgrey};
+    & p,
+    h1,
+    span {
+      color: black;
+    }
+  }
+  &.dark {
+    background: ${colors.dark};
+    & p,
+    h1,
+    span {
+      color: ${colors.white};
+    }
+
+    & div::after {
+      background: ${colors.darkestgrey};
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -23,21 +43,15 @@ const Container = styled.div`
 `;
 
 const PageLayout = ({ children }) => {
+  const { theme } = useTheme();
+
   return (
-    <>
-      <Head>
-        <link
-        // href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap"
-        // rel="stylesheet"
-        />
-      </Head>
-      <MainContainer>
-        <Container>
-          <Navbar />
-          <GernericContainer>{children}</GernericContainer>
-        </Container>
-      </MainContainer>
-    </>
+    <MainContainer className={theme.type}>
+      <Container>
+        <Navbar />
+        <GernericContainer>{children}</GernericContainer>
+      </Container>
+    </MainContainer>
   );
 };
 

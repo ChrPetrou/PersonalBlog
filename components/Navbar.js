@@ -2,6 +2,7 @@ import colors from "configs/colors";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useTheme } from "providers/ThemeProvider";
 
 const Navbar = styled.div`
   width: 100%;
@@ -10,7 +11,7 @@ const Navbar = styled.div`
   z-index: 20;
   backdrop-filter: blur(5px);
 
-  background: #f1f2f454;
+  background: rgba(0, 0, 0, 0.04);
 `;
 
 const NavbarInner = styled.div`
@@ -46,10 +47,12 @@ const NavbarInner = styled.div`
 
 const BlogNavbar = () => {
   const { asPath } = useRouter();
+  const { theme, toggleTheme } = useTheme();
   return (
     <Navbar>
       <NavbarInner>
         <h1>Personal-Blog</h1>
+        <button onClick={toggleTheme}>{theme?.type}</button>
         {asPath !== "/" ? (
           <Link href={"/"}>
             <h2>Home</h2>

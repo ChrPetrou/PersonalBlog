@@ -6,6 +6,7 @@ import "highlight.js/styles/base16/Helios.css";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import ThemeProvider from "providers/ThemeProvider";
 
 export default function App({ Component, pageProps }) {
   const { events } = useRouter();
@@ -16,8 +17,10 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <PageLayout>
-      <Component {...pageProps} />
-    </PageLayout>
+    <ThemeProvider>
+      <PageLayout>
+        <Component {...pageProps} />
+      </PageLayout>
+    </ThemeProvider>
   );
 }

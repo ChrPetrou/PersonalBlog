@@ -233,7 +233,7 @@ export async function getStaticPaths(context) {
     paths: paths?.map((slug) => ({
       params: { slug },
     })),
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -246,8 +246,16 @@ export async function getStaticProps(context) {
     })
     .then((res) => res.data);
 
+  if (typeof blogData === "undefined" || !blogData) {
+    return {
+      notFound: true,
+      props: {},
+    };
+  }
+
   return {
     props: {
+      revalidate: 60,
       blogData: blogData,
     },
   };
