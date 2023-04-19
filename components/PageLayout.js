@@ -20,7 +20,7 @@ const MainContainer = styled.div`
     }
   }
   &.dark {
-    background: #141218;
+    background: ${colors.darkmode};
     & p,
     h1,
     span,
@@ -34,7 +34,7 @@ const MainContainer = styled.div`
     }
 
     & div::after {
-      background: #1d1c23;
+      background: ${colors.cardDarkMode};
     }
   }
 `;

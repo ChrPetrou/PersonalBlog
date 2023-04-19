@@ -25,18 +25,18 @@ const NavbarInner = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-
+  flex-wrap: wrap;
+  /* gap: 10px; */
   justify-content: space-between;
   color: ${colors.purble};
   & a {
     text-decoration: none;
     font-weight: 800;
+    cursor: pointer;
     color: ${colors.purble};
     :hover {
       color: ${colors.lightpurble};
     }
-
-    cursor: pointer;
   }
 
   & h1 {
@@ -48,6 +48,7 @@ const NavbarInner = styled.div`
 const FunctionContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -61,8 +62,8 @@ const Circle = styled.div`
 
   position: absolute;
 
-  left: ${({ themeProv }) => themeProv === "light" && "calc(0 + 10px)"};
-  right: ${({ themeProv }) => themeProv === "dark" && "2px"};
+  left: ${({ themeProv }) =>
+    themeProv === "light" ? "2px" : "calc(100% - 22.5px)"};
 
   padding: 10px;
   border-radius: 100%;
@@ -75,7 +76,7 @@ const LightDark = styled.div`
   position: relative;
   cursor: pointer;
   background: black;
-  width: 50px;
+  width: 55px;
   padding: 10px 2px;
   border-radius: 15px;
   height: 25px;

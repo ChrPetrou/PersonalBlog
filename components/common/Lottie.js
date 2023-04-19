@@ -43,13 +43,13 @@ const Lottie = ({
         height: height,
         width: width,
         marginBottom: mBottom,
-        transition: `all 0.15s linear`,
+        transition: `all 0.1s linear`,
         filter: filter,
         pointerEvents: "none",
         ...style,
       }}
       ref={element}
-    ></div>
+    />
   );
 };
 

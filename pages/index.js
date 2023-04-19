@@ -93,34 +93,35 @@ export default function Home({ allBlogs, pagesNumber }) {
       <AuthorIntro setIsList={setIsList} isList={isList} />
       <h1>Projects:{currPage[0]}</h1>
       <CardItemsContainer>
-        {isloading ? (
-          <Lottie
-            animationData={Loading}
-            loop={true}
-            autoPlay={true}
-            style={{
-              margin: "auto",
-              height: 80,
-              width: 80,
-            }}
-          />
-        ) : (
-          <>
-            {blogs?.map((curr, index) =>
-              !isList ? (
-                <CardItem key={index} curr={curr} />
-              ) : (
-                <CardListItem key={index} curr={curr} />
-              )
-            )}
-          </>
-        )}
+        <>
+          {blogs?.map((curr, index) =>
+            !isList ? (
+              <CardItem key={index} curr={curr} />
+            ) : (
+              <CardListItem key={index} curr={curr} />
+            )
+          )}
+        </>
+
         <ButtonContainer mWidth={isList}>
           <LoadMoreContainer
             canLoad={pagesNumber[currPage + 1]}
             onClick={() => pagesNumber[currPage + 1] && loadMore()}
           >
-            <p>More Blogs</p>
+            {isloading ? (
+              <Lottie
+                animationData={Loading}
+                loop={true}
+                autoPlay={true}
+                style={{
+                  margin: "auto",
+                  height: 30,
+                  width: 30,
+                }}
+              />
+            ) : (
+              <p>More Blogs</p>
+            )}
           </LoadMoreContainer>
         </ButtonContainer>
       </CardItemsContainer>
@@ -131,13 +132,10 @@ export default function Home({ allBlogs, pagesNumber }) {
 export async function getStaticProps(context) {
   const pagesNumber = await blogsService.getBlogCount();
 
-  const allBlogs = await axios
-    .post(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogs`, {
-      blogLimitStart: 0,
-      blogLimiteEnd: 3,
-    })
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+  const allBlogs = await blogsService.getAllBlogs({
+    blogLimitStart: 0,
+    blogLimiteEnd: 3,
+  });
   return {
     props: {
       allBlogs,

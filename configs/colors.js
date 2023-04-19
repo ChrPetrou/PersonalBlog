@@ -7,4 +7,6 @@ export default {
   grey: "#999999",
   white: "#eeeeee",
   dark: "black",
+  darkmode: "#111111",
+  cardDarkMode: "#181818",
 };

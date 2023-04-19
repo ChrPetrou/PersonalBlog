@@ -21,6 +21,7 @@ const CardContainer = styled.div`
   transition: 0.2s linear;
   transition-property: transform, scale;
   /* transform-origin: center; */
+
   width: calc((100% / 3) - (40px / 3));
   position: relative;
   border-radius: 10px;
@@ -218,9 +219,9 @@ const ReadMore = styled(Link)`
     position: absolute;
     width: 100%;
     height: 100%;
-    box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
-    -webkit-box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
-    -moz-box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
+    box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
+    -webkit-box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
+    -moz-box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
   }
 `;
 
