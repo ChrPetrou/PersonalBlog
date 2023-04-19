@@ -1,11 +1,9 @@
 import AuthorIntro from "components/AuthorIntro";
-
 import CardItem from "components/CardItem";
 import axios from "axios";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import CardListItem from "components/CardListItem";
 import { useState } from "react";
-import Link from "next/link";
 import colors from "configs/colors";
 import blogsService from "backend/services/blog.service";
 import Lottie from "components/common/Lottie";
@@ -70,24 +68,17 @@ export default function Home({ allBlogs, pagesNumber }) {
     setCurrPage(currPage + 1);
     setIsLoading(true);
     if (pagesNumber[currPage + 1]) {
-      const environmentUrl = process.env.NEXT_PUBLIC_ENVIRONMENT_URL;
       try {
-        const extaBlogs = await axios.post(
-          `${environmentUrl}/blogs/getAllBlogs`,
-          {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,OPTIONS",
-            "Access-Control-Allow-Headers": "Authorization,Content-Type",
-          },
-          {
-            blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
-            blogLimiteEnd: pagesNumber[currPage + 1] * 3,
-          }
-        );
+        const extaBlogs = await axios.post(`/api/blogs/getAllBlogs`, {
+          blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
+          blogLimiteEnd: pagesNumber[currPage + 1] * 3,
+        });
+
         setBlogs((prevState) => [...prevState, ...extaBlogs.data]);
       } catch (error) {
         console.log(error);
       }
+
       setIsLoading(false);
     }
   };
@@ -109,8 +100,10 @@ export default function Home({ allBlogs, pagesNumber }) {
 
         <ButtonContainer mWidth={isList}>
           <LoadMoreContainer
-            canLoad={pagesNumber[currPage + 1]}
-            onClick={() => pagesNumber[currPage + 1] && loadMore()}
+            canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1])}
+            onClick={() => {
+              if (pagesNumber.indexOf(pagesNumber[currPage + 1])) loadMore();
+            }}
           >
             {isloading ? (
               <Lottie
