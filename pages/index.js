@@ -44,7 +44,7 @@ const LoadMoreContainer = styled.div`
   justify-content: center;
   border: 1px solid ${({ canLoad }) => (canLoad ? colors.purble : colors.grey)};
   padding: 10px;
-  cursor: ${({ canLoad }) => (canLoad ? "pointer" : "defualt")};
+  cursor: ${({ canLoad }) => (canLoad ? "pointer" : "default")};
   border-radius: 8px;
   width: 200px;
   text-decoration: none;
@@ -71,27 +71,26 @@ export default function Home({ allBlogs, pagesNumber }) {
     setIsLoading(true);
     if (pagesNumber[currPage + 1]) {
       const environmentUrl = process.env.NEXT_PUBLIC_ENVIRONMENT_URL;
-      const extaBlogs = await axios
-        .post(`${environmentUrl}/blogs/getAllBlogs`, {
-          blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
-          blogLimiteEnd: pagesNumber[currPage + 1] * 3,
-        })
-        .then((res) => {
-          setIsLoading(false);
-          return res.data;
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          console.log(err);
-        });
-      setBlogs((prevState) => [...prevState, ...extaBlogs]);
+      try {
+        const extaBlogs = await axios.post(
+          `${environmentUrl}/blogs/getAllBlogs`,
+          {
+            blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
+            blogLimiteEnd: pagesNumber[currPage + 1] * 3,
+          }
+        );
+        setBlogs((prevState) => [...prevState, ...extaBlogs.data]);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
     }
   };
 
   return (
     <Container>
       <AuthorIntro setIsList={setIsList} isList={isList} />
-      <h1>Projects:{currPage[0]}</h1>
+      <h1>Projects:</h1>
       <CardItemsContainer>
         <>
           {blogs?.map((curr, index) =>
