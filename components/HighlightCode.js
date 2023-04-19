@@ -13,19 +13,18 @@ const CodeFileName = styled.pre`
 `;
 
 const HighlightCode = ({ children, language }) => {
-  const code = createRef();
+  const codeRef = useRef(null);
 
   useEffect(() => {
-    highlight.highlightElement(findDOMNode(code.current));
+    highlight.highlightElement(codeRef.current);
   }, []);
+
   return (
-    <>
-      <CodeFileName>
-        <code ref={code} className={language}>
-          {children}
-        </code>
-      </CodeFileName>
-    </>
+    <CodeFileName>
+      <code ref={codeRef} className={language}>
+        {children}
+      </code>
+    </CodeFileName>
   );
 };
 
