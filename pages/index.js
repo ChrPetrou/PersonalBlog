@@ -75,6 +75,11 @@ export default function Home({ allBlogs, pagesNumber }) {
         const extaBlogs = await axios.post(
           `${environmentUrl}/blogs/getAllBlogs`,
           {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization,Content-Type",
+          },
+          {
             blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
             blogLimiteEnd: pagesNumber[currPage + 1] * 3,
           }
@@ -135,6 +140,7 @@ export async function getStaticProps(context) {
     blogLimitStart: 0,
     blogLimiteEnd: 3,
   });
+
   return {
     revalidate: 60,
     props: {
