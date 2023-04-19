@@ -66,8 +66,8 @@ const Container = styled.div`
 `;
 
 const PageLayout = ({ children }) => {
-  const [theme, toggleTheme] = useTheme();
-  console.log(theme);
+  const [theme] = useTheme();
+
   return (
     <MainContainer theme={theme}>
       <Container>

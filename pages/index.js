@@ -100,9 +100,10 @@ export default function Home({ allBlogs, pagesNumber }) {
 
         <ButtonContainer mWidth={isList}>
           <LoadMoreContainer
-            canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1])}
+            canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1}
             onClick={() => {
-              if (pagesNumber.indexOf(pagesNumber[currPage + 1])) loadMore();
+              if (pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1)
+                loadMore();
             }}
           >
             {isloading ? (
