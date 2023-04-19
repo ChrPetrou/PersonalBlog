@@ -50,7 +50,7 @@ const MainContainer = styled.div`
     color: ${({ theme }) => colors["light"].svgColor};
   }
 
-  & p,
+  & > p,
   span {
     color: ${({ theme }) => colors[theme].text};
   }

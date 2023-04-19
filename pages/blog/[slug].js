@@ -6,7 +6,6 @@ import colors from "configs/colors";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "providers/ThemeProvider";
-
 import React from "react";
 import styled from "styled-components";
 import { dateNow, sanityImageDimensions, urlForImage } from "utils/helpers";
@@ -17,6 +16,7 @@ const SlugContainer = styled.div`
   width: 100%;
   border-top: 1px solid ${colors.darkergrey};
   padding: 20px 0;
+  color: ${({ theme }) => colors[theme].text};
 `;
 
 const SlugHeader = styled.div`
@@ -24,7 +24,7 @@ const SlugHeader = styled.div`
   gap: 10px;
   display: flex;
   flex-direction: column;
-  color: ${({ theme }) => colors[theme].text};
+
   & h1 {
     font-size: 40px;
     font-weight: 600;
@@ -183,8 +183,8 @@ const serializer = {
 const slug = ({ blogData }) => {
   const [theme] = useTheme();
   return (
-    <SlugContainer>
-      <SlugHeader theme={theme}>
+    <SlugContainer theme={theme}>
+      <SlugHeader>
         <ImageDateContainer>
           <HeaderImage>
             <Image
