@@ -183,6 +183,7 @@ const CardDetailsContent = styled.div`
   padding: 20px 0;
   gap: 15px;
   flex-direction: column;
+  color: ${({ theme }) => colors[theme].text};
   & p {
     font-size: 20px;
     font-weight: 600;
@@ -283,7 +284,7 @@ const CardItem = ({ curr }) => {
           </CardDetailsImg>
 
           <CardDetails>
-            <CardDetailsContent>
+            <CardDetailsContent theme={theme}>
               <p>{curr?.title}</p>
               <span>{curr?.subtitle}</span>
             </CardDetailsContent>

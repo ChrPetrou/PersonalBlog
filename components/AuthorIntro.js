@@ -6,6 +6,7 @@ import { TbGridDots } from "react-icons/tb";
 import React from "react";
 // import { Row, Col, Media, Image } from "react-bootstrap"
 import styled from "styled-components";
+import { useTheme } from "providers/ThemeProvider";
 
 const AuthorContainer = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const AuthorContainer = styled.div`
   position: relative;
   border-bottom: 1px solid ${colors.darkergrey};
   padding: 20px 0px;
+  color: ${({ theme }) => colors[theme].text};
   & svg {
     position: absolute;
     margin: 5px 0;
@@ -60,8 +62,9 @@ const ContextContainer = styled.div`
 `;
 
 const AuthorIntro = ({ setIsList, isList }) => {
+  const [theme] = useTheme();
   return (
-    <AuthorContainer>
+    <AuthorContainer theme={theme}>
       <AuthorContainerInner>
         <ImageContainer>
           <Image src={myprof} width={80} height={80} alt={"myprof"} />
