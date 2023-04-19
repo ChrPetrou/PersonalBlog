@@ -4,6 +4,7 @@ import GernericContainer from "components/GernericContainer";
 import TextContent from "components/TextContent";
 import colors from "configs/colors";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { dateNow, sanityImageDimensions, urlForImage } from "utils/helpers";
