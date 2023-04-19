@@ -180,7 +180,7 @@ const serializer = {
   },
 };
 
-const slug = ({ blogData }) => {
+const Slug = ({ blogData }) => {
   const [theme] = useTheme();
   return (
     <SlugContainer theme={theme}>
@@ -227,7 +227,7 @@ const slug = ({ blogData }) => {
   );
 };
 
-export default slug;
+export default Slug;
 
 export async function getStaticPaths(context) {
   const paths = await axios
