@@ -23,7 +23,7 @@ const SlugHeader = styled.div`
   gap: 10px;
   display: flex;
   flex-direction: column;
-  color: ${({ theme }) => colors[theme].text};
+  /* color: ${({ theme }) => colors[theme].text}; */
   & h1 {
     font-size: 40px;
     font-weight: 600;
@@ -180,10 +180,9 @@ const serializer = {
 };
 
 const slug = ({ blogData }) => {
-  const [theme] = useTheme();
   return (
     <SlugContainer>
-      <SlugHeader theme={theme}>
+      <SlugHeader>
         <ImageDateContainer>
           <HeaderImage>
             <Image
