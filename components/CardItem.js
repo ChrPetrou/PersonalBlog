@@ -230,7 +230,7 @@ const ReadMore = styled(Link)`
 
 const CardItem = ({ curr }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
   const refContainer = useRef();
 
   return (
