@@ -137,6 +137,7 @@ export async function getStaticProps(context) {
     blogLimiteEnd: 3,
   });
   return {
+    revalidate: 60,
     props: {
       allBlogs,
       pagesNumber,
