@@ -39,21 +39,24 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const LoadMore = styled.div`
+const LoadMoreContainer = styled.div`
   display: flex;
   justify-content: center;
-  border: 1px solid
-    ${({ canLoad }) => (canLoad ? colors.purble : colors.darkergrey)};
+  border: 1px solid ${({ canLoad }) => (canLoad ? colors.purble : colors.grey)};
   padding: 10px;
   cursor: ${({ canLoad }) => (canLoad ? "pointer" : "defualt")};
   border-radius: 8px;
   width: 200px;
   text-decoration: none;
-  color: ${({ canLoad }) => (canLoad ? colors.purble : colors.darkergrey)};
   transition: all 0.2s linear;
   :hover {
     background: ${({ canLoad }) => (canLoad ? colors.purble : "")};
-    color: ${({ canLoad }) => (canLoad ? colors.white : "")};
+    & p {
+      color: ${({ canLoad }) => (canLoad ? colors.white : "")};
+    }
+  }
+  & p {
+    color: ${({ canLoad }) => (canLoad ? colors.purble : colors.grey)};
   }
 `;
 
@@ -113,12 +116,12 @@ export default function Home({ allBlogs, pagesNumber }) {
           </>
         )}
         <ButtonContainer mWidth={isList}>
-          <LoadMore
+          <LoadMoreContainer
             canLoad={pagesNumber[currPage + 1]}
             onClick={() => pagesNumber[currPage + 1] && loadMore()}
           >
             <p>More Blogs</p>
-          </LoadMore>
+          </LoadMoreContainer>
         </ButtonContainer>
       </CardItemsContainer>
     </Container>

@@ -60,9 +60,10 @@ const Card = styled.div`
     background-color: #fff;
     position: absolute;
     inset: 0;
+    width: 100%;
     z-index: 1;
     opacity: 1;
-    border-radius: 10px;
+    border-radius: 14px;
   }
   @media only screen and (max-width: 750px) {
     width: 100%;

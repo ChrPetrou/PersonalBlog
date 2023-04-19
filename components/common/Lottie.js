@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import lottie from "lottie-web";
-import colors from "configs/colors";
 
 const Lottie = ({
   animationData,

@@ -105,13 +105,13 @@ const BlogNavbar = () => {
 
         <FunctionContainer>
           <LightDark onClick={() => handleTheme()}>
-            <BsLightbulbOffFill
+            <BsLightbulbFill
               color={"white"}
               size={18}
               style={{ position: "absolute", zIndex: -1, left: "3px" }}
             />
             <Circle themeProv={theme?.type} />
-            <BsLightbulbFill
+            <BsLightbulbOffFill
               size={18}
               color={"white"}
               style={{

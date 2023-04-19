@@ -52,7 +52,7 @@ const PageLayout = ({ children }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <MainContainer className={theme.type}>
+    <MainContainer className={theme?.type}>
       <Container>
         <Navbar />
         <GernericContainer>{children}</GernericContainer>
