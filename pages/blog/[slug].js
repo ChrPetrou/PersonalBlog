@@ -182,7 +182,7 @@ const serializer = {
 const slug = ({ blogData }) => {
   const [theme] = useTheme();
   return (
-    <SlugContainer theme={theme}>
+    <SlugContainer>
       <SlugHeader theme={theme}>
         <ImageDateContainer>
           <HeaderImage>
