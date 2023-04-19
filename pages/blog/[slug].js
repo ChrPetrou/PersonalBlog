@@ -1,10 +1,11 @@
 import { PortableText } from "@portabletext/react";
 import axios from "axios";
-import GernericContainer from "components/GernericContainer";
+
 import TextContent from "components/TextContent";
 import colors from "configs/colors";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "providers/ThemeProvider";
 import React from "react";
 import styled from "styled-components";
 import { dateNow, sanityImageDimensions, urlForImage } from "utils/helpers";
@@ -22,6 +23,7 @@ const SlugHeader = styled.div`
   gap: 10px;
   display: flex;
   flex-direction: column;
+  color: ${({ theme }) => colors[theme].text};
   & h1 {
     font-size: 40px;
     font-weight: 600;
@@ -178,9 +180,10 @@ const serializer = {
 };
 
 const slug = ({ blogData }) => {
+  const [theme] = useTheme();
   return (
-    <SlugContainer>
-      <SlugHeader>
+    <SlugContainer theme={theme}>
+      <SlugHeader theme={theme}>
         <ImageDateContainer>
           <HeaderImage>
             <Image

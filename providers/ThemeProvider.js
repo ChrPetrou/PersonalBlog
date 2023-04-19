@@ -1,46 +1,23 @@
-import { ThemeContext, themes } from "context/ThemeContext";
-import React, { useEffect, useMemo, useState } from "react";
-import { useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(themes.light);
+const ThemeContext = createContext();
 
-  const toggleTheme = async () => {
-    setTheme(theme === themes.light ? themes.dark : themes.light);
-    localStorage.setItem(
-      "theme",
-      theme === themes.light ? themes.dark.type : themes.light.type
-    );
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
   };
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === themes.dark.type) {
-      setTheme(themes.dark);
-    } else {
-      setTheme(themes.light);
-    }
-  }, []);
-
-  const getTheme = async () => {
-    return theme;
-  };
-
-  const themeAPI = useMemo(() => {
-    return {
-      theme,
-      toggleTheme,
-      getTheme,
-    };
-  }, [theme, toggleTheme, getTheme]);
 
   return (
-    <ThemeContext.Provider value={themeAPI}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={[theme, toggleTheme]}>
+      {children}
+    </ThemeContext.Provider>
   );
-};
-
-export const useTheme = () => {
-  return useContext(ThemeContext);
-};
+}
 
 export default ThemeProvider;
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}

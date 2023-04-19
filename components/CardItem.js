@@ -9,6 +9,7 @@ import {
   urlForImage,
 } from "utils/helpers";
 import Link from "next/link";
+import { useTheme } from "providers/ThemeProvider";
 
 const backgroundAnimation = keyframes`
  0% {background-position: 0% 50%;}
@@ -26,7 +27,7 @@ const CardContainer = styled.div`
   position: relative;
   border-radius: 10px;
   backface-visibility: hidden;
-  border: 1px solid ${colors.darkergrey};
+  border: ${({ theme }) => `1px solid ${colors[theme].darkergrey} `};
   margin-bottom: 35px;
   padding: 20px;
 
@@ -71,7 +72,7 @@ const CardContainer = styled.div`
   }
   ::after {
     content: "";
-    background-color: #fff;
+    background-color: ${({ theme }) => colors[theme].linkColor};
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -86,7 +87,6 @@ const RotativeDiv = styled.div`
   display: flex;
   position: absolute;
   background: transparent;
-  /* background: red; */
   scale: 1.05;
   inset: 1px;
   z-index: 10;
@@ -96,7 +96,7 @@ const RotativeDiv = styled.div`
 const CardDepth = styled(Link)`
   width: 100%;
   text-decoration: none;
-  color: ${colors.dark};
+  color: ${colors.light.text};
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -115,12 +115,15 @@ const CardHeader = styled.div`
   width: 100%;
   flex-direction: row;
   gap: 10px;
+  & h1 {
+    color: ${({ theme }) => colors[theme].text};
+  }
 `;
 
 const CardImage = styled.div`
   display: flex;
   border-radius: 100%;
-  border: 1px solid ${colors.darkestgrey};
+  border: 1px solid ${colors.light.darkestgrey};
 
   align-items: center;
   width: 50px;
@@ -148,7 +151,6 @@ const CardHeaderDetails = styled.div`
     font-weight: 600;
   }
   & span {
-    color: ${colors.grey};
     font-size: 12px;
   }
 `;
@@ -156,10 +158,10 @@ const CardHeaderDetails = styled.div`
 const CardDetails = styled.div`
   display: flex;
   z-index: 2;
-  /* gap: 20px; */
+
   flex-direction: column;
   justify-content: flex-end;
-  /* flex-wrap: wrap; */
+
   width: 100%;
 `;
 
@@ -192,7 +194,7 @@ const ReadMore = styled(Link)`
   justify-content: center;
   align-items: center;
   position: absolute;
-  background: ${colors.darkestgrey};
+  background: ${({ theme }) => colors[theme].darkestgrey};
   right: 20px;
   text-decoration: none;
   top: 100%;
@@ -208,7 +210,8 @@ const ReadMore = styled(Link)`
     padding: 10px;
   }
   & p {
-    color: ${colors.white};
+    z-index: 1;
+    color: white;
     margin: auto;
     font-size: 15px;
     font-weight: 600;
@@ -227,12 +230,13 @@ const ReadMore = styled(Link)`
 
 const CardItem = ({ curr }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+  const [theme, toggleTheme] = useTheme();
   const refContainer = useRef();
 
   return (
     <>
       <CardContainer
+        theme={theme}
         ref={refContainer}
         style={{
           transform: `perspective(120000px) rotateY(${mousePosition.x}deg)  rotateX(${mousePosition.y}deg)`,
@@ -247,7 +251,7 @@ const CardItem = ({ curr }) => {
             e.stopPropagation();
           }}
         >
-          <CardHeader>
+          <CardHeader theme={theme}>
             <CardImage>
               <Image
                 src={urlForImage(curr?.author?.image)
@@ -285,7 +289,11 @@ const CardItem = ({ curr }) => {
             </CardDetailsContent>
           </CardDetails>
         </CardDepth>
-        <ReadMore href={{ pathname: `/blog/${curr?.slug}` }} passHref>
+        <ReadMore
+          theme={theme}
+          href={{ pathname: `/blog/${curr?.slug}` }}
+          passHref
+        >
           <p>Read More</p>
         </ReadMore>
         <Link href={{ pathname: `/blog/${curr?.slug}` }} passHref>

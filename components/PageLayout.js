@@ -6,12 +6,12 @@ import styled from "styled-components";
 import GernericContainer from "./GernericContainer";
 import Navbar from "./Navbar";
 
-const MainContainer = styled.div`
+const MainContainer1 = styled.div`
   width: 100%;
   display: flex;
   position: relative;
   transition: all 0.2s ease-in-out;
-  &.light {
+  /* &.light {
     background: ${colors.lightgrey};
     & > p,
     h1,
@@ -36,6 +36,23 @@ const MainContainer = styled.div`
     & div::after {
       background: ${colors.cardDarkMode};
     }
+  } */
+`;
+
+const MainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background: ${({ theme }) => colors[theme].background};
+
+  svg {
+    color: ${({ theme }) => colors["light"].svgColor};
+  }
+
+  & p,
+  span {
+    color: ${({ theme }) => colors[theme].text};
   }
 `;
 
@@ -49,10 +66,10 @@ const Container = styled.div`
 `;
 
 const PageLayout = ({ children }) => {
-  const { theme, toggleTheme } = useTheme();
-
+  const [theme, toggleTheme] = useTheme();
+  console.log(theme);
   return (
-    <MainContainer className={theme?.type}>
+    <MainContainer theme={theme}>
       <Container>
         <Navbar />
         <GernericContainer>{children}</GernericContainer>
