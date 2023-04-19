@@ -1,6 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import colors from "configs/colors";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { urlForImage } from "utils/helpers";
