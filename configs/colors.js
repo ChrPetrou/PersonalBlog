@@ -1,5 +1,5 @@
 export default {
-  purble: "#4f266e",
+  purble: "#552977",
   lightpurble: "rgb(123, 70, 183)",
   lightgrey: "#F1F2F4",
   darkergrey: "#dbdee0",
@@ -7,13 +7,8 @@ export default {
   grey: "#999999",
   white: "#eeeeee",
   dark: "black",
-
-  purble: "#4f266e",
   lightpurble: "rgb(123, 70, 183)",
   light: {
-    purble: "#4f266e",
-    lightpurble: "rgb(123, 70, 183)",
-
     darkergrey: "#dbdee0",
     darkestgrey: "#424247",
     grey: "#999999",
@@ -29,9 +24,6 @@ export default {
     afterColor: "#404045",
   },
   dark: {
-    purble: "#4f266e",
-    lightpurble: "rgb(123, 70, 183)",
-    lightgrey: "#F1F2F4",
     darkergrey: "#dbdee0",
     darkestgrey: "#424247",
     grey: "#999999",
