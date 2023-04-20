@@ -115,7 +115,8 @@ const CardHeader = styled.div`
   width: 100%;
   flex-direction: row;
   gap: 10px;
-  & h1 {
+  & h1,
+  span {
     color: ${({ theme }) => colors[theme].text};
   }
 `;

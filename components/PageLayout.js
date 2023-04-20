@@ -50,8 +50,7 @@ const MainContainer = styled.div`
     color: ${colors.purble};
   }
 
-  & > p,
-  span {
+  & > p {
     color: ${({ theme }) => colors[theme].text};
   }
 `;
