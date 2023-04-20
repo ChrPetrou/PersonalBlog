@@ -1,5 +1,5 @@
 export default {
-  purble: "#552977",
+  purble: "#6e4093",
   lightpurble: "rgb(123, 70, 183)",
   lightgrey: "#F1F2F4",
   darkergrey: "#dbdee0",
@@ -18,7 +18,6 @@ export default {
     cardDarkMode: "#181818",
 
     background: "#F1F2F4",
-    svgColor: "#4f266e",
     text: "black",
     linkColor: "#ffffff",
     afterColor: "#404045",
@@ -29,10 +28,8 @@ export default {
     grey: "#999999",
     white: "#eeeeee",
     dark: "black",
-
     cardDarkMode: "#181818",
     background: "#111111",
-    svgColor: "white",
     text: "white",
     linkColor: "#181818",
     afterColor: "#404045",

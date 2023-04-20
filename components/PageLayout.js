@@ -47,7 +47,7 @@ const MainContainer = styled.div`
   background: ${({ theme }) => colors[theme].background};
 
   svg {
-    color: ${({ theme }) => colors["light"].svgColor};
+    color: ${colors.purble};
   }
 
   & > p,

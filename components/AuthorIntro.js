@@ -24,8 +24,8 @@ const AuthorContainer = styled.div`
     bottom: 0;
     transition: all 0.1s linear;
     :hover {
-      width: 27px;
-      height: 27px;
+      width: 32px;
+      height: 32px;
       color: ${colors.lightpurble};
     }
     cursor: pointer;
@@ -78,9 +78,9 @@ const AuthorIntro = ({ setIsList, isList }) => {
         </ContextContainer>
       </AuthorContainerInner>
       {!isList ? (
-        <AiOutlineUnorderedList size={25} onClick={() => setIsList(!isList)} />
+        <AiOutlineUnorderedList size={30} onClick={() => setIsList(!isList)} />
       ) : (
-        <TbGridDots size={25} onClick={() => setIsList(!isList)} />
+        <TbGridDots size={30} onClick={() => setIsList(!isList)} />
       )}
     </AuthorContainer>
   );
