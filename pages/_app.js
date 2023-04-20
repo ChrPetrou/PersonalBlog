@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
     events.on("routeChangeStart", () => NProgress.start());
     events.on("routeChangeComplete", () => NProgress.done());
     events.on("routeChangeError", () => NProgress.done());
-  }, []);
+  }, [events]);
 
   return (
     <ThemeProvider>
