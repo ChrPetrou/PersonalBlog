@@ -33,7 +33,7 @@ const Lottie = ({
       }
       hasLoaded.current = false;
     }
-  }, [animationData]);
+  }, [animationData, onComplete, loop, autoPlay]);
   return (
     <div
       onClick={() => {
