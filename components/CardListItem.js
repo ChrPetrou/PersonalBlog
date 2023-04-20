@@ -2,6 +2,7 @@ import colors from "configs/colors";
 import { dummImg } from "configs/images";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "providers/ThemeProvider";
 import React from "react";
 
 import styled, { keyframes } from "styled-components";
@@ -18,7 +19,7 @@ const Card = styled.div`
   position: relative;
   flex-direction: column;
   border-radius: 15px;
-  background: #ffffff;
+  color: ${({ theme }) => colors[theme].text};
   margin: 20px 0;
   width: 100%;
   max-width: 1000px;
@@ -57,7 +58,8 @@ const Card = styled.div`
 
   ::after {
     content: "";
-    background-color: #fff;
+
+    background: ${({ theme }) => colors[theme].linkColor};
     position: absolute;
     inset: 0;
     width: 100%;
@@ -154,15 +156,16 @@ const ReadMore = styled(Link)`
     top: 0; */
     width: 100%;
     height: 100%;
-    box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
-    -webkit-box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
-    -moz-box-shadow: 1px -16px 0px -10px rgba(0, 0, 0, 0.71) inset;
+    box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
+    -webkit-box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
+    -moz-box-shadow: 1px -15px 20px -10px rgba(0, 0, 0, 0.71) inset;
   }
 `;
 
 const CardListItem = ({ curr }) => {
+  const [theme] = useTheme();
   return (
-    <Card>
+    <Card theme={theme}>
       <PlaceHolderContainer>
         <ImagePlaceHolder>
           <Image
