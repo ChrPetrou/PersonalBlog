@@ -91,7 +91,7 @@ const Circle = styled.div`
     box-shadow: 9px 22px 0px -5px rgba(255, 255, 255, 0.1),
       -5px 22px 0px -8px rgba(255, 255, 255, 0.1),
       2px 30px 0px -8px rgba(255, 255, 255, 0.1),
-      20px 25px 0px -8px rgba(255, 255, 255, 0.1),
+      20px 30px 0px -8px rgba(255, 255, 255, 0.1),
       -2px 37px 0px -8px rgba(255, 255, 255, 0.1),
       10px 37px 0px -8px rgba(255, 255, 255, 0.1),
       20px 45px 0px -8px rgba(255, 255, 255, 0.1),

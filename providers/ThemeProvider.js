@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
@@ -7,7 +7,12 @@ function ThemeProvider({ children }) {
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
+    sessionStorage.setItem("mode", theme === "light" ? "dark" : "light");
   };
+
+  useEffect(() => {
+    setTheme(sessionStorage.getItem("mode"));
+  }, []);
 
   return (
     <ThemeContext.Provider value={[theme, toggleTheme]}>
