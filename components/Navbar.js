@@ -58,36 +58,74 @@ const FunctionContainer = styled.div`
 const Circle = styled.div`
   display: flex;
   z-index: 1;
+  /* box-shadow: 0 0 20px rgba(240, 240, 240, 0.5); */
+  transition: all 0.15s linear;
+  ::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
 
-  transition: left, right 1s linear;
-
-  position: absolute;
+    background-color: ${({ themeProv }) =>
+      themeProv === "dark" ? "#423966" : "#ffbf71"};
+    right: 0;
+    border-radius: 50%;
+    transition: all 0.15s linear;
+    scale: ${({ themeProv }) => (themeProv === "dark" ? "1" : "0")};
+    transform: ${({ themeProv }) =>
+      themeProv === "dark" ? "translate(30%, -25%)" : "translate(120%, -100%)"};
+  }
+  position: relative;
+  /* left: 5px; */
 
   left: ${({ themeProv }) =>
-    themeProv === "light" ? "2px" : "calc(100% - 22.5px)"};
+    themeProv === "dark" ? "5px" : "calc(100% - 30px)"};
 
   padding: 10px;
   border-radius: 100%;
   background: white;
+
+  &.Moon {
+    /* background: red; */
+    transform: rotate(-75deg);
+    box-shadow: 9px 22px 0px -5px rgba(255, 255, 255, 0.1),
+      -5px 22px 0px -8px rgba(255, 255, 255, 0.1),
+      2px 30px 0px -8px rgba(255, 255, 255, 0.1),
+      20px 25px 0px -8px rgba(255, 255, 255, 0.1),
+      -2px 37px 0px -8px rgba(255, 255, 255, 0.1),
+      10px 37px 0px -8px rgba(255, 255, 255, 0.1),
+      20px 45px 0px -8px rgba(255, 255, 255, 0.1),
+      5px 50px 0px -6px rgba(255, 255, 255, 0.1);
+  }
+  &.Sun {
+    transform: rotate(0deg);
+    box-shadow: 13px -0px 0px -8px white, -13px 0px 0px -8px white,
+      9px 9px 0px -8.5px white, -9px -9px 0px -8.5px white,
+      -0px -13.5px 0px -8px white, 0px 13.5px 0px -8px white,
+      -9px 9px 0px -8.5px white, 9px -9px 0px -8.5px white;
+  }
 `;
 
 const LightDark = styled.div`
   display: flex;
   align-items: center;
+  overflow: hidden;
   position: relative;
   cursor: pointer;
-  background: black;
-  width: 55px;
-  padding: 10px 2px;
-  border-radius: 15px;
-  height: 25px;
+  transition: all 0.15s linear;
+  background: ${({ themeProv }) =>
+    themeProv === "dark" ? "#423966" : "#ffbf71"};
+  width: 85px;
+  /* padding: 9px 2px; */
+  border-radius: 20px;
+  height: 40px;
   z-index: 0;
   :hover {
     & ${Circle} {
-      transition: all 0.15s linear;
-      box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
+      transition: all 0.35s linear;
+      /* box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
       -webkit-box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
-      -moz-box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
+      -moz-box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75); */
     }
   }
 `;
@@ -97,7 +135,7 @@ const Navigations = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const NavItem = styled.div`
@@ -115,7 +153,7 @@ const BlogNavbar = () => {
         <h1>Personal-Blog</h1>
         <Navigations>
           {navigations?.map((element, index) => (
-            <NavItem isActive={asPath === element.link}>
+            <NavItem key={index} isActive={asPath === element.link}>
               {asPath !== element.link ? (
                 <Link href={element.link}>
                   <h2>{element.name}</h2>
@@ -134,15 +172,18 @@ const BlogNavbar = () => {
           )} */}
         </Navigations>
         <FunctionContainer>
-          <LightDark onClick={() => toggleTheme()}>
-            <BsLightbulbFill
+          <LightDark themeProv={theme} onClick={() => toggleTheme()}>
+            {/* <BsLightbulbFill
               color={"white"}
               size={18}
               style={{ position: "absolute", zIndex: -1, left: "3px" }}
-            />
+            /> */}
 
-            <Circle themeProv={theme} />
-            <BsLightbulbOffFill
+            <Circle
+              className={theme === "dark" ? "Moon" : "Sun"}
+              themeProv={theme}
+            />
+            {/* <BsLightbulbOffFill
               size={18}
               color={"white"}
               style={{
@@ -150,7 +191,7 @@ const BlogNavbar = () => {
                 zIndex: -1,
                 right: "3px",
               }}
-            />
+            /> */}
           </LightDark>
         </FunctionContainer>
       </NavbarInner>

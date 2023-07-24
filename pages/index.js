@@ -59,36 +59,15 @@ const LoadMoreContainer = styled.div`
 `;
 
 export default function Home() {
-  const loadMore = async () => {
-    setCurrPage(currPage + 1);
-    setIsLoading(true);
-    if (pagesNumber[currPage + 1]) {
-      try {
-        const extaBlogs = await axios.post(`/api/blogs/getAllBlogs`, {
-          blogLimitStart: pagesNumber[currPage + 1] * 3 - 3,
-          blogLimiteEnd: pagesNumber[currPage + 1] * 3,
-        });
-
-        setBlogs((prevState) => [...prevState, ...extaBlogs.data]);
-      } catch (error) {
-        console.log(error);
-      }
-
-      setIsLoading(false);
-    }
-  };
-
   return (
     <Container>
-      <AuthorIntro setIsList={setIsList} isList={isList} />
+      <AuthorIntro />
     </Container>
   );
 }
 
 export async function getStaticProps(context) {
-  const pagesNumber = await blogsService.getBlogCount();
-
   return {
-    revalidate: 60,
+    props: {},
   };
 }
