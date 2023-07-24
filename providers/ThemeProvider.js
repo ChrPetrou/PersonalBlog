@@ -11,7 +11,8 @@ function ThemeProvider({ children }) {
   };
 
   useEffect(() => {
-    setTheme(sessionStorage.getItem("mode"));
+    if (sessionStorage.getItem("mode"))
+      setTheme(sessionStorage.getItem("mode"));
   }, []);
 
   return (
