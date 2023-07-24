@@ -58,12 +58,7 @@ const LoadMoreContainer = styled.div`
   }
 `;
 
-export default function Home({ allBlogs, pagesNumber }) {
-  const [isList, setIsList] = useState(false);
-  const [blogs, setBlogs] = useState(allBlogs);
-  const [currPage, setCurrPage] = useState(0);
-  const [isloading, setIsLoading] = useState(false);
-
+export default function Home() {
   const loadMore = async () => {
     setCurrPage(currPage + 1);
     setIsLoading(true);
@@ -86,43 +81,6 @@ export default function Home({ allBlogs, pagesNumber }) {
   return (
     <Container>
       <AuthorIntro setIsList={setIsList} isList={isList} />
-      <h1>Projects:</h1>
-      <CardItemsContainer>
-        <>
-          {blogs?.map((curr, index) =>
-            !isList ? (
-              <CardItem key={index} curr={curr} />
-            ) : (
-              <CardListItem key={index} curr={curr} />
-            )
-          )}
-        </>
-
-        <ButtonContainer mWidth={isList}>
-          <LoadMoreContainer
-            canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1}
-            onClick={() => {
-              if (pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1)
-                loadMore();
-            }}
-          >
-            {isloading ? (
-              <Lottie
-                animationData={Loading}
-                loop={true}
-                autoPlay={true}
-                style={{
-                  margin: "auto",
-                  height: 30,
-                  width: 30,
-                }}
-              />
-            ) : (
-              <p>More Blogs</p>
-            )}
-          </LoadMoreContainer>
-        </ButtonContainer>
-      </CardItemsContainer>
     </Container>
   );
 }
@@ -130,16 +88,7 @@ export default function Home({ allBlogs, pagesNumber }) {
 export async function getStaticProps(context) {
   const pagesNumber = await blogsService.getBlogCount();
 
-  const allBlogs = await blogsService.getAllBlogs({
-    blogLimitStart: 0,
-    blogLimiteEnd: 3,
-  });
-
   return {
     revalidate: 60,
-    props: {
-      allBlogs,
-      pagesNumber,
-    },
   };
 }

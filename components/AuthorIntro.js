@@ -1,8 +1,7 @@
 import colors from "configs/colors";
 import { myprof } from "configs/images";
 import Image from "next/image";
-import { AiOutlineUnorderedList } from "react-icons/ai";
-import { TbGridDots } from "react-icons/tb";
+
 import React from "react";
 // import { Row, Col, Media, Image } from "react-bootstrap"
 import styled from "styled-components";
@@ -14,22 +13,9 @@ const AuthorContainer = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   position: relative;
-  border-bottom: 1px solid ${colors.darkergrey};
+  /* border-bottom: 1px solid ${colors.darkergrey}; */
   padding: 20px 0px;
   color: ${({ theme }) => colors[theme].text};
-  & svg {
-    position: absolute;
-    margin: 5px 0;
-
-    bottom: 0;
-    transition: all 0.1s linear;
-    :hover {
-      width: 32px;
-      height: 32px;
-      color: ${colors.lightpurble};
-    }
-    cursor: pointer;
-  }
 `;
 
 const AuthorContainerInner = styled.div`
@@ -72,16 +58,11 @@ const AuthorIntro = ({ setIsList, isList }) => {
         <ContextContainer>
           <span>Hello Friends,</span>
           <p>
-            My name is Chris Petrou and I am a junior Full-stack developer. and
-            this is my blog page.
+            My name is Chris Petrou and I am a junior Full-stack developer.This
+            is my blog page.
           </p>
         </ContextContainer>
       </AuthorContainerInner>
-      {!isList ? (
-        <AiOutlineUnorderedList size={30} onClick={() => setIsList(!isList)} />
-      ) : (
-        <TbGridDots size={30} onClick={() => setIsList(!isList)} />
-      )}
     </AuthorContainer>
   );
 };

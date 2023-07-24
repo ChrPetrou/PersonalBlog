@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useTheme } from "providers/ThemeProvider";
 import { BsLightbulbFill, BsLightbulbOffFill } from "react-icons/bs";
+import navigations from "configs/navigations";
 const Navbar = styled.div`
   width: 100%;
   position: sticky;
@@ -91,6 +92,19 @@ const LightDark = styled.div`
   }
 `;
 
+const Navigations = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+const NavItem = styled.div`
+  display: flex;
+  cursor: ${({ isActive }) => (isActive ? "default" : "pointer")};
+`;
+
 const BlogNavbar = () => {
   const { asPath } = useRouter();
   const [theme, toggleTheme] = useTheme();
@@ -99,7 +113,26 @@ const BlogNavbar = () => {
     <Navbar>
       <NavbarInner>
         <h1>Personal-Blog</h1>
-
+        <Navigations>
+          {navigations?.map((element, index) => (
+            <NavItem isActive={asPath === element.link}>
+              {asPath !== element.link ? (
+                <Link href={element.link}>
+                  <h2>{element.name}</h2>
+                </Link>
+              ) : (
+                <h2>{element.name}</h2>
+              )}
+            </NavItem>
+          ))}
+          {/* {asPath !== "/" ? (
+            <Link href={"/"}>
+              <h2>Home</h2>
+            </Link>
+          ) : (
+            <h2>Home</h2>
+          )} */}
+        </Navigations>
         <FunctionContainer>
           <LightDark onClick={() => toggleTheme()}>
             <BsLightbulbFill
@@ -107,6 +140,7 @@ const BlogNavbar = () => {
               size={18}
               style={{ position: "absolute", zIndex: -1, left: "3px" }}
             />
+
             <Circle themeProv={theme} />
             <BsLightbulbOffFill
               size={18}
@@ -118,14 +152,6 @@ const BlogNavbar = () => {
               }}
             />
           </LightDark>
-
-          {asPath !== "/" ? (
-            <Link href={"/"}>
-              <h2>Home</h2>
-            </Link>
-          ) : (
-            <h2>Home</h2>
-          )}
         </FunctionContainer>
       </NavbarInner>
     </Navbar>

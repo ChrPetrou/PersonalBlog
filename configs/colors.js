@@ -1,6 +1,6 @@
 export default {
   purble: "#6e4093",
-  lightpurble: "rgb(123, 70, 183)",
+  lightpurble: "#8e5ac9",
   lightgrey: "#F1F2F4",
   darkergrey: "#dbdee0",
   darkestgrey: "#424247",
