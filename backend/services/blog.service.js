@@ -61,7 +61,7 @@ const blogsService = {
     });
   },
 
-  getAllBlogsSlugs: async ({ slug }) => {
+  getAllBlogsSlugs: async (slug) => {
     const client = sanityClient(sanityConfig);
     const query = `*[_type == "blog" && defined(slug.current)].slug.current `;
     return client.fetch(query).catch((err) => {
