@@ -233,10 +233,10 @@ export default Slug;
 export async function getStaticPaths(context) {
   const pathst = await blogsService.getAllBlogsSlugs();
 
-  const paths = await axios
-    .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+  // const paths = await axios
+  //   .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
+  //   .then((res) => res.data)
+  //   .catch((err) => console.log(err));
   return {
     paths: pathst?.map((slug) => ({
       params: { slug },
