@@ -33,7 +33,7 @@ const blogsService = {
         throw err;
       });
   },
-  getBlogBySlug: async () => {
+  getBlogBySlug: async (_retry = 0) => {
     const client = sanityClient(sanityConfig);
     const query = `*[_type == "blog" && slug.current == $slug][0]{
         "createAt":_createdAt,
@@ -68,8 +68,12 @@ const blogsService = {
   getAllBlogsSlugs: async (_retry = 0) => {
     const client = sanityClient(sanityConfig);
     const query = `*[_type == "blog" && defined(slug.current)].slug.current `;
-    return client.fetch(query).catch((err) => {
-      throw err;
+    return client.fetch(query).catch(async (err) => {
+      if (_retry > 1) {
+        throw err;
+      }
+      await sleep(1000);
+      return blogsService.getAllBlogsSlugs(_retry + 1);
     });
   },
   getBlogCount: async () => {

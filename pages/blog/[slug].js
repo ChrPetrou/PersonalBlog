@@ -247,7 +247,7 @@ export async function getStaticPaths(context) {
 
 export async function getStaticProps(context) {
   const { slug = "" } = context.params;
-
+  // const blogData2 = await blogsService.getAllBlogsSlugs();
   const blogData = await axios
     .post(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getBlogBySlug`, {
       slug,
