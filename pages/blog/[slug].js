@@ -232,7 +232,7 @@ export default Slug;
 
 export async function getStaticPaths(context) {
   const pathst = await blogsService.getAllBlogsSlugs();
-
+  console.log(context);
   // const paths = await axios
   //   .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
   //   .then((res) => res.data)
