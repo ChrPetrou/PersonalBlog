@@ -86,7 +86,6 @@ const Circle = styled.div`
   background: white;
 
   &.Moon {
-    /* background: red; */
     transform: rotate(-75deg);
     box-shadow: 9px 22px 0px -5px rgba(255, 255, 255, 0.1),
       -5px 22px 0px -8px rgba(255, 255, 255, 0.1),
