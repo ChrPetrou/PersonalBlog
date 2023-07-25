@@ -238,7 +238,7 @@ export async function getStaticPaths(context) {
     .then((res) => res.data)
     .catch((err) => console.log(err));
   return {
-    paths: pathst?.map((slug) => ({
+    paths: paths?.map((slug) => ({
       params: { slug },
     })),
     fallback: false,
