@@ -231,17 +231,17 @@ const Slug = ({ blogData }) => {
 export default Slug;
 
 export async function getStaticPaths(context) {
-  // const pathst = await blogsService.getAllBlogsSlugs();
+  const pathst = await blogsService.getAllBlogsSlugs();
   console.log(context);
-  const paths = await axios
-    .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+  // const paths = await axios
+  //   .get(`${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/blogs/getAllBlogsSlugs`)
+  //   .then((res) => res.data)
+  //   .catch((err) => console.log(err));
   return {
-    paths: paths?.map((slug) => ({
+    paths: pathst?.map((slug) => ({
       params: { slug },
     })),
-    fallback: false,
+    fallback: "blocking",
   };
 }
 

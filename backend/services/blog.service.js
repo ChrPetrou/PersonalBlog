@@ -56,12 +56,16 @@ const blogsService = {
           coverImage,
         "subtitle":subtitle
       }`;
-    return client.fetch(query, { slug }).catch((err) => {
-      throw err;
+    return client.fetch(query, { slug }).catch(async (err) => {
+      if (_retry > 1) {
+        throw err;
+      }
+      await sleep(1000);
+      return blogsService.getBlogBySlug(_retry + 1);
     });
   },
 
-  getAllBlogsSlugs: async () => {
+  getAllBlogsSlugs: async (_retry = 0) => {
     const client = sanityClient(sanityConfig);
     const query = `*[_type == "blog" && defined(slug.current)].slug.current `;
     return client.fetch(query).catch((err) => {
