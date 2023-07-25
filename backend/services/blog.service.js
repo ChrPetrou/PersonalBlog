@@ -67,7 +67,7 @@ const blogsService = {
 
   getAllBlogsSlugs: async (_retry = 0) => {
     const client = sanityClient(sanityConfig);
-    const query = `*[_type == "blog" && defined(slug.current)].slug.current `;
+    const query = `*[_type == "post" && defined(slug.current)][].slug.current`;
     return client.fetch(query).catch(async (err) => {
       if (_retry > 1) {
         throw err;
