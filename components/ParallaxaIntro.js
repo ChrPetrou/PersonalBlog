@@ -1,5 +1,6 @@
 import colors from "configs/colors";
 import {
+  blackFog,
   cloud,
   fog,
   mountainL2,
@@ -127,10 +128,10 @@ const Container = styled.div`
     object-fit: cover;
     width: 100%;
     height: 100%;
+
     left: 0;
     transition: all 1s linear;
-    top: ${({ scrollDirection }) =>
-      scrollDirection === "down" ? "0%" : "90%"};
+    top: ${({ scrollY }) => (scrollY > 50 ? "0%" : "120%")};
   }
   .cloud {
     position: absolute;
@@ -141,6 +142,7 @@ const Container = styled.div`
     height: 100%;
     left: 0;
     top: -10%;
+    mix-blend-mode: ${({ theme }) => (theme == "dark" ? "" : "unset")};
   }
 `;
 const ParallaxaIntro = () => {
@@ -198,7 +200,7 @@ const ParallaxaIntro = () => {
       ref={ref}
       theme={theme}
       bg={parallaxbg}
-      scrollDirection={scrollDirection}
+      scrollY={scrollY}
       mouseMovmentX={mouseMovment.x}
       mouseMovmentY={mouseMovment.y}
     >
@@ -224,8 +226,23 @@ const ParallaxaIntro = () => {
         height={2000}
         alt="mnt2"
       />
-
-      <Image className="fog1" src={fog} width={3800} height={3800} alt="fog" />
+      {theme === "dark" ? (
+        <Image
+          className="fog1"
+          src={blackFog}
+          width={3800}
+          height={3800}
+          alt="fog"
+        />
+      ) : (
+        <Image
+          className="fog1"
+          src={fog}
+          width={3800}
+          height={3800}
+          alt="fog"
+        />
+      )}
     </Container>
   );
 };

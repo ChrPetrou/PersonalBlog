@@ -58,7 +58,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
   devIndicators: {
-    buildActivity: "bottom-left",
+    buildActivity: true,
   },
   compiler: {
     styledComponents: true,
