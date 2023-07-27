@@ -89,12 +89,12 @@ const Container = styled.div`
     transition: all 1s linear;
     position: absolute;
     object-fit: contain;
-    max-width: 1600px;
-    max-height: 1000px;
+    max-width: 1700px;
+    max-height: 1200px;
     width: 100%;
     height: 100%;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(max(calc(-2%  + ${mouseMovmentX / 5}px), 0px ), calc(-1%  + ${
+      `translate(max(calc(-2%  + ${mouseMovmentX / 5}px), 0px ), calc(-2%  + ${
         mouseMovmentY / 5
       }px))`};
     aspect-ratio: 1;
@@ -155,8 +155,8 @@ const ParallaxaIntro = () => {
       let x = e.clientX - ref.current.clientWidth / 2; //check how far is mouse from the center of container in X axis
       let y = e.clientY - ref.current.clientHeight / 2; //check how far is mouse from the center of container in Y axis
       setMouseMovment({
-        x: clamp(x, 0, -x, -200, 200),
-        y: clamp(y, 0, -y, -200, 200),
+        x: x,
+        y: y,
       });
     }
 
@@ -213,15 +213,15 @@ const ParallaxaIntro = () => {
       <Image
         className="Mountain1"
         src={mountainR}
-        width={3800}
-        height={3800}
+        width={1900}
+        height={2000}
         alt="mnt1"
       />
       <Image
         className="Mountain2"
         src={mountainL2}
-        width={3800}
-        height={3800}
+        width={1900}
+        height={2000}
         alt="mnt2"
       />
 
