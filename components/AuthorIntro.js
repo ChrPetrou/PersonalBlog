@@ -58,11 +58,11 @@ const AuthorIntro = ({ setIsList, isList }) => {
         <ContextContainer>
           <span> Hey! My name is Christos Petrou,</span>
           <p>
-            I'm a full-stack Junior developer with a passion for front end
+            {`  I'm a full-stack Junior developer with a passion for front end
             development and design. I studied at University of Crete pursuing a
             degree in computer science . I aspire toward a career that will
             allow me to channel my creativity through crafting beautiful
-            software and engaging experiences.
+            software and engaging experiences.`}
           </p>
         </ContextContainer>
       </AuthorContainerInner>

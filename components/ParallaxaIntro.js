@@ -17,22 +17,37 @@ const Container = styled.div`
   overflow: hidden;
   min-height: 800px;
   display: flex;
-  background-image: ${({ bg }) => `url(${bg})`};
+  /* background-image: ${({ bg }) => `url(${bg})`}; */
   background-size: cover;
   background-position: top;
   background-repeat: repeat;
   position: relative;
   transition: all 1s linear;
-  /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-    `translate(calc(-50%  + ${mouseMovmentX}px), calc(-10%  + ${mouseMovmentY}px))`}; */
+
+  .BgMountain {
+    perspective: 1000;
+    transition: all 1s linear;
+    position: absolute;
+    min-width: 2000px;
+    min-height: 2000px;
+    transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+      `translate(calc(-1%  + ${mouseMovmentX / 20}px), calc(-1%  + ${
+        mouseMovmentY / 10
+      }px))`};
+    object-fit: cover;
+    top: 700px;
+    margin: auto;
+    bottom: 0;
+    left: -50px;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   .Mountain1 {
     perspective: 1000;
     transition: all 1s linear;
     position: absolute;
-    /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(${mouseMovmentX / 50 + "px"}, ${
-        mouseMovmentY / 50 + "px"
-      })`}; */
 
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(calc(-50%  + ${mouseMovmentX}px), calc(-10%  + ${mouseMovmentY}px))`};
@@ -54,8 +69,10 @@ const Container = styled.div`
     max-height: 900px;
     width: 100%;
     height: 100%;
-    transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(${mouseMovmentX / 5 + "px"}, ${mouseMovmentY / 50 + "px"})`};
+    /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+      `translate(${mouseMovmentX / 5 + "px"}, ${
+        mouseMovmentY / 50 + "px"
+      })`}; */
     aspect-ratio: 1;
     right: 55%;
     top: 20%;
@@ -126,24 +143,32 @@ const ParallaxaIntro = () => {
       mouseMovmentY={mouseMovment.y}
     >
       <Image
+        className="BgMountain"
+        src={parallaxbg}
+        width={3800}
+        height={3800}
+        alt="mnt1"
+      />
+
+      <Image
         className="Mountain1"
         src={mountainR}
-        width={800}
-        height={500}
+        width={3800}
+        height={3800}
         alt="mnt1"
       />
       <Image
         className="Mountain2"
         src={mountainL2}
-        width={800}
-        height={500}
+        width={3800}
+        height={3800}
         alt="mnt2"
       />
       <Image
         className="sunLight"
         src={sunLight}
-        width={800}
-        height={500}
+        width={3800}
+        height={3800}
         alt="mnt2"
       />
     </Container>
