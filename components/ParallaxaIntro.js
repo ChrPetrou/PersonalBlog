@@ -94,7 +94,7 @@ const Container = styled.div`
     height: 100%;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(calc(-2%  + ${mouseMovmentX / 5}px), calc(-1%  + ${
-        mouseMovmentY / 3
+        mouseMovmentY / 5
       }px))`};
     aspect-ratio: 1;
     right: 35%;
