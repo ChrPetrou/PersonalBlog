@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useTheme } from "providers/ThemeProvider";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { clamp } from "utils/helpers";
 
 const Container = styled.div`
   width: 100%;
@@ -93,7 +94,7 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(calc(-2%  + ${mouseMovmentX / 5}px), calc(-1%  + ${
+      `translate(max(calc(-2%  + ${mouseMovmentX / 5}px), 0px ), calc(-1%  + ${
         mouseMovmentY / 5
       }px))`};
     aspect-ratio: 1;
@@ -153,7 +154,10 @@ const ParallaxaIntro = () => {
     if (ref.current) {
       let x = e.clientX - ref.current.clientWidth / 2; //check how far is mouse from the center of container in X axis
       let y = e.clientY - ref.current.clientHeight / 2; //check how far is mouse from the center of container in Y axis
-      setMouseMovment({ x, y });
+      setMouseMovment({
+        x: clamp(x, 0, -x, -200, 200),
+        y: clamp(y, 0, -y, -200, 200),
+      });
     }
 
     console.log(mouseMovment);
