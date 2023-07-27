@@ -3,14 +3,18 @@ import CardItem from "components/CardItem";
 import axios from "axios";
 import styled from "styled-components";
 import CardListItem from "components/CardListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import colors from "configs/colors";
 import blogsService from "backend/services/blog.service";
 import Lottie from "components/common/Lottie";
 import Loading from "../public/animations/loading.json";
+import ParallaxaIntro from "components/ParallaxaIntro";
+import GernericContainer from "components/GernericContainer";
 
 const Container = styled.div`
   display: flex;
+  position: relative;
+  overflow: hidden;
   flex-direction: column;
   width: 100%;
   gap: 10px;
@@ -58,10 +62,25 @@ const LoadMoreContainer = styled.div`
   }
 `;
 
+const BigCircle = styled.div`
+  display: flex;
+  width: 1500px;
+  height: 1500px;
+  border-radius: 50%;
+  left: 10%;
+  z-index: 1;
+  bottom: 20%;
+  background-color: #ffbf71;
+  position: absolute;
+`;
+
 export default function Home() {
   return (
     <Container>
-      <AuthorIntro />
+      <ParallaxaIntro />
+      <GernericContainer>
+        <AuthorIntro />
+      </GernericContainer>
     </Container>
   );
 }

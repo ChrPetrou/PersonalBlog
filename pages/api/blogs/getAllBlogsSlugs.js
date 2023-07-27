@@ -6,7 +6,7 @@ export default function handler(req, res) {
   return new Promise((resolve, reject) => {
     const client = sanityClient(sanityConfig);
 
-    const query = `*[_type == "blog" && defined(slug.current)].slug.current `;
+    const query = `*[_type == "blog" && defined(slug.current)][].slug.current `;
 
     client
       .fetch(query)

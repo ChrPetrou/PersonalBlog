@@ -7,12 +7,12 @@ import { BsLightbulbFill, BsLightbulbOffFill } from "react-icons/bs";
 import navigations from "configs/navigations";
 const Navbar = styled.div`
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 20;
   backdrop-filter: blur(5px);
 
-  background: rgba(0, 0, 0, 0.04);
+  /* background: rgba(0, 0, 0, 0.04); */
 `;
 
 const NavbarInner = styled.div`
@@ -41,6 +41,7 @@ const NavbarInner = styled.div`
   }
 
   & h1 {
+    cursor: pointer;
     font-size: 30px;
     font-weight: 900;
   }
@@ -76,8 +77,6 @@ const Circle = styled.div`
       themeProv === "dark" ? "translate(30%, -25%)" : "translate(120%, -100%)"};
   }
   position: relative;
-  /* left: 5px; */
-
   left: ${({ themeProv }) =>
     themeProv === "dark" ? "5px" : "calc(100% - 30px)"};
 
@@ -122,9 +121,6 @@ const LightDark = styled.div`
   :hover {
     & ${Circle} {
       transition: all 0.35s linear;
-      /* box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
-      -webkit-box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75);
-      -moz-box-shadow: 0px 0px 4px 3px rgba(12, 179, 179, 0.75); */
     }
   }
 `;
@@ -149,7 +145,14 @@ const BlogNavbar = () => {
   return (
     <Navbar>
       <NavbarInner>
-        <h1>Personal-Blog</h1>
+        {asPath !== "/" ? (
+          <Link href={"/"}>
+            <h1>Digital Portfolio</h1>
+          </Link>
+        ) : (
+          <h1>Digital Portfolio</h1>
+        )}
+
         <Navigations>
           {navigations?.map((element, index) => (
             <NavItem key={index} isActive={asPath === element.link}>

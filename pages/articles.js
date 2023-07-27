@@ -11,6 +11,7 @@ import Lottie from "components/common/Lottie";
 import Loading from "../public/animations/loading.json";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { TbGridDots } from "react-icons/tb";
+import GernericContainer from "components/GernericContainer";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,50 +104,55 @@ const Articles = ({ allBlogs, pagesNumber }) => {
     }
   };
   return (
-    <Container>
-      {/* <AuthorIntro setIsList={setIsList} isList={isList} /> */}
-      {!isList ? (
-        <AiOutlineUnorderedList size={30} onClick={() => setIsList(!isList)} />
-      ) : (
-        <TbGridDots size={30} onClick={() => setIsList(!isList)} />
-      )}
-      <CardItemsContainer>
-        <>
-          {blogs?.map((curr, index) =>
-            !isList ? (
-              <CardItem key={index} curr={curr} />
-            ) : (
-              <CardListItem key={index} curr={curr} />
-            )
-          )}
-        </>
-
-        <ButtonContainer mWidth={isList}>
-          <LoadMoreContainer
-            canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1}
-            onClick={() => {
-              if (pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1)
-                loadMore();
-            }}
-          >
-            {isloading ? (
-              <Lottie
-                animationData={Loading}
-                loop={true}
-                autoPlay={true}
-                style={{
-                  margin: "auto",
-                  height: 30,
-                  width: 30,
-                }}
-              />
-            ) : (
-              <p>More Blogs</p>
+    <GernericContainer>
+      <Container>
+        {/* <AuthorIntro setIsList={setIsList} isList={isList} /> */}
+        {!isList ? (
+          <AiOutlineUnorderedList
+            size={30}
+            onClick={() => setIsList(!isList)}
+          />
+        ) : (
+          <TbGridDots size={30} onClick={() => setIsList(!isList)} />
+        )}
+        <CardItemsContainer>
+          <>
+            {blogs?.map((curr, index) =>
+              !isList ? (
+                <CardItem key={index} curr={curr} />
+              ) : (
+                <CardListItem key={index} curr={curr} />
+              )
             )}
-          </LoadMoreContainer>
-        </ButtonContainer>
-      </CardItemsContainer>
-    </Container>
+          </>
+
+          <ButtonContainer mWidth={isList}>
+            <LoadMoreContainer
+              canLoad={pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1}
+              onClick={() => {
+                if (pagesNumber.indexOf(pagesNumber[currPage + 1]) > -1)
+                  loadMore();
+              }}
+            >
+              {isloading ? (
+                <Lottie
+                  animationData={Loading}
+                  loop={true}
+                  autoPlay={true}
+                  style={{
+                    margin: "auto",
+                    height: 30,
+                    width: 30,
+                  }}
+                />
+              ) : (
+                <p>More Blogs</p>
+              )}
+            </LoadMoreContainer>
+          </ButtonContainer>
+        </CardItemsContainer>
+      </Container>
+    </GernericContainer>
   );
 };
 

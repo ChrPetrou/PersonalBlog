@@ -3,7 +3,7 @@ p,
 a,
 div,
 span {
-  font-family: Nunito Sans, sans-serif;
+  font-family: "Fahkwang", sans-serif;
   font-style: normal;
 }
 
@@ -14,7 +14,7 @@ span {
 }
 
 @font-face {
-  font-family: "Nunito Sans";
+  font-family: "Fahkwang";
   src: url("../assets/fonts/NunitoSans/NunitoSans-Regular.ttf")
     format("truetype");
   font-weight: 400;

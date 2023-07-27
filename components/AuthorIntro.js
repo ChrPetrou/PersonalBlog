@@ -38,11 +38,11 @@ const ContextContainer = styled.div`
   display: flex;
   flex-direction: column;
   & p {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 400;
   }
   & span {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 600;
   }
 `;
@@ -56,10 +56,13 @@ const AuthorIntro = ({ setIsList, isList }) => {
           <Image src={myprof} width={80} height={80} alt={"myprof"} />
         </ImageContainer>
         <ContextContainer>
-          <span>Hello Friends,</span>
+          <span> Hey! My name is Christos Petrou,</span>
           <p>
-            My name is Chris Petrou and I am a junior Full-stack developer.This
-            is my blog page.
+            I'm a full-stack Junior developer with a passion for front end
+            development and design. I studied at University of Crete pursuing a
+            degree in computer science . I aspire toward a career that will
+            allow me to channel my creativity through crafting beautiful
+            software and engaging experiences.
           </p>
         </ContextContainer>
       </AuthorContainerInner>

@@ -8,6 +8,7 @@ export default {
   white: "#eeeeee",
   dark: "black",
   lightpurble: "rgb(123, 70, 183)",
+  lightGray: "rgb(184 205 220 / 59%)",
   light: {
     darkergrey: "#dbdee0",
     darkestgrey: "#424247",
