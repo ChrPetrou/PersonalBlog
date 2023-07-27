@@ -1,41 +1,60 @@
+import colors from "configs/colors";
 import {
-  mountainBottom,
-  mountainL,
+  cloud,
+  fog,
   mountainL2,
   mountainR,
   parallaxbg,
   sunLight,
 } from "configs/images";
 import Image from "next/image";
+import { useTheme } from "providers/ThemeProvider";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   margin: auto;
-  max-width: 2000px;
+  width: 2000px;
   overflow: hidden;
-  min-height: 800px;
+  min-height: 100vh;
   display: flex;
-  /* background-image: ${({ bg }) => `url(${bg})`}; */
+  background-color: ${({ theme }) =>
+    theme == "dark" ? " rgb(0 0 0 / 50%)" : "unset"};
+
+  & > p {
+    color: ${({ theme }) => colors[theme].text};
+  }
   background-size: cover;
-  background-position: top;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   position: relative;
   transition: all 1s linear;
+  background-position: ${({ mouseMovmentX, mouseMovmentY }) =>
+    `calc(-10% + ${mouseMovmentX / 100}px) calc(-% + ${mouseMovmentY / 10}px)`};
+
+  ::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: ${({ theme }) =>
+      theme == "dark" ? " rgb(0 0 0 / 60%)" : "unset"};
+  }
 
   .BgMountain {
-    perspective: 1000;
     transition: all 1s linear;
     position: absolute;
+
+    mix-blend-mode: saturation;
     min-width: 2000px;
     min-height: 2000px;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(calc(-1%  + ${mouseMovmentX / 20}px), calc(-1%  + ${
-        mouseMovmentY / 10
+        mouseMovmentY / 5
       }px))`};
+
     object-fit: cover;
-    top: 700px;
+    top: 800px;
     margin: auto;
     bottom: 0;
     left: -50px;
@@ -45,15 +64,18 @@ const Container = styled.div`
   }
 
   .Mountain1 {
-    perspective: 1000;
+    perspective: 1000000;
+    mix-blend-mode: ${({ theme }) => (theme == "dark" ? "" : "unset")};
     transition: all 1s linear;
     position: absolute;
 
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(calc(-50%  + ${mouseMovmentX}px), calc(-10%  + ${mouseMovmentY}px))`};
+      `translate(calc(-1%  + ${mouseMovmentX / 10}px), calc(-1%  + ${
+        mouseMovmentY / 3
+      }px))`};
     object-fit: contain;
-    max-width: 1300px;
-    max-height: 750px;
+    max-width: 1500px;
+    max-height: 950px;
     width: 100%;
     height: 100%;
     aspect-ratio: 1;
@@ -61,20 +83,21 @@ const Container = styled.div`
     top: 20%;
   }
   .Mountain2 {
+    /* mix-blend-mode: hue; */
     perspective: 1000;
     transition: all 1s linear;
     position: absolute;
     object-fit: contain;
-    max-width: 1300px;
-    max-height: 900px;
+    max-width: 1600px;
+    max-height: 1000px;
     width: 100%;
     height: 100%;
-    /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-      `translate(${mouseMovmentX / 5 + "px"}, ${
-        mouseMovmentY / 50 + "px"
-      })`}; */
+    transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+      `translate(calc(-2%  + ${mouseMovmentX / 5}px), calc(-1%  + ${
+        mouseMovmentY / 3
+      }px))`};
     aspect-ratio: 1;
-    right: 55%;
+    right: 35%;
     top: 20%;
   }
   .sunLight {
@@ -92,19 +115,39 @@ const Container = styled.div`
   .MountnBtm {
     position: absolute;
     object-fit: cover;
-    /* max-width: 794px; */
-    /* max-height: 400px; */
     width: 100%;
     height: 100%;
     transform: scaleX(-1);
     right: 0;
     top: 10%;
   }
+  .fog1 {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transition: all 1s linear;
+    top: ${({ scrollDirection }) =>
+      scrollDirection === "down" ? "0%" : "90%"};
+  }
+  .cloud {
+    position: absolute;
+    object-fit: contain;
+    max-width: 200px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: -10%;
+  }
 `;
 const ParallaxaIntro = () => {
+  const [theme] = useTheme();
   const ref = useRef(null);
   const [mouseMovment, setMouseMovment] = useState({ x: 0, y: 0 });
-  console.log(ref.current);
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("down");
 
   const handleMouse = (e) => {
     if (ref.current) {
@@ -112,8 +155,6 @@ const ParallaxaIntro = () => {
       let y = e.clientY - ref.current.clientHeight / 2; //check how far is mouse from the center of container in Y axis
       setMouseMovment({ x, y });
     }
-
-    // setMouseMovment(window.innerWidth);
 
     console.log(mouseMovment);
   };
@@ -135,10 +176,25 @@ const ParallaxaIntro = () => {
     };
   }, [mouseMovment]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setScrollDirection(window.scrollY > scrollY ? "down" : "up");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollY]);
+
   return (
     <Container
       ref={ref}
+      theme={theme}
       bg={parallaxbg}
+      scrollDirection={scrollDirection}
       mouseMovmentX={mouseMovment.x}
       mouseMovmentY={mouseMovment.y}
     >
@@ -164,13 +220,8 @@ const ParallaxaIntro = () => {
         height={3800}
         alt="mnt2"
       />
-      <Image
-        className="sunLight"
-        src={sunLight}
-        width={3800}
-        height={3800}
-        alt="mnt2"
-      />
+
+      <Image className="fog1" src={fog} width={3800} height={3800} alt="fog" />
     </Container>
   );
 };
