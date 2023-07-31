@@ -141,7 +141,7 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
   /* background-color: red; */
-  transition: all 1s linear;
+  transition: all 0.15s ease-in-out;
   top: ${({ scrollY }) => (scrollY > 50 ? "0%" : "120%")};
   & img {
     object-fit: contain;
