@@ -133,7 +133,7 @@ const Fog = styled.div`
   height: 100%;
   position: absolute;
   left: 0;
-  /* background-color: red; */
+  z-index: 2;
   transition: all 0.15s ease-in-out;
   top: ${({ scrollY }) => (scrollY > 50 ? "0%" : "120%")};
   & img {
