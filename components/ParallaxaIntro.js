@@ -17,7 +17,6 @@ import { clamp } from "utils/helpers";
 const Container = styled.div`
   width: 100%;
   margin: auto;
-  width: 2000px;
   overflow: hidden;
   min-height: 100vh;
   display: flex;
@@ -48,21 +47,19 @@ const Container = styled.div`
     position: absolute;
 
     mix-blend-mode: saturation;
-    min-width: 2000px;
-    min-height: 2000px;
+    width: 120%;
+    height: 180%;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(calc(-1%  + ${mouseMovmentX / 20}px), calc(-1%  + ${
-        mouseMovmentY / 5
+        mouseMovmentY / 20
       }px))`};
 
     object-fit: cover;
-    top: 800px;
-    margin: auto;
+    top: 00px;
+    /* margin: auto; */
     bottom: 0;
     left: -50px;
     right: 0;
-    width: 100%;
-    height: 100%;
   }
 
   .Mountain1 {
@@ -226,7 +223,7 @@ const ParallaxaIntro = () => {
         height={2000}
         alt="mnt2"
       />
-      {theme === "dark" ? (
+      {/* {theme === "dark" ? (
         <Image
           className="fog1"
           src={blackFog}
@@ -242,7 +239,7 @@ const ParallaxaIntro = () => {
           height={3800}
           alt="fog"
         />
-      )}
+      )} */}
     </Container>
   );
 };
