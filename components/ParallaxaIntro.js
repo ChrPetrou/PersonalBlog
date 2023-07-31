@@ -30,11 +30,20 @@ const Container = styled.div`
   }
   background-size: cover;
   background-repeat: no-repeat;
+
   position: relative;
   transition: all 1s linear;
   background-position: ${({ mouseMovmentX, mouseMovmentY }) =>
     `calc(-10% + ${mouseMovmentX / 100}px) calc(-% + ${mouseMovmentY / 10}px)`};
+`;
 
+const ContainerInner = styled.div`
+  display: flex;
+  position: fixed;
+  width: 100%;
+  background-color: ${({ theme }) =>
+    theme == "dark" ? " rgb(0 0 0 / 60%)" : "unset"};
+  height: 100%;
   ::after {
     content: "";
     transition: all 1s linear;
@@ -138,8 +147,7 @@ const Fog = styled.div`
   top: 100%;
   /* top: ${({ scrollY }) => (scrollY > 10 ? `${-scrollY / 80}%` : "120%")}; */
   /* top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`}; */
-  transform: ${({ scrollY }) =>
-    `translateY(calc(max(${-scrollY / 2}%, -100%)))`};
+  transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`};
   & img {
     position: absolute;
     object-fit: cover;
@@ -210,57 +218,58 @@ const ParallaxaIntro = () => {
   }, [scrollY]);
 
   return (
-    <Container
-      ref={ref}
-      theme={theme}
-      bg={parallaxbg}
-      scrollY={scrollY}
-      mouseMovmentX={mouseMovment.x}
-      mouseMovmentY={mouseMovment.y}
-    >
-      <Image
-        className="BgMountain"
-        src={parallaxbg}
-        width={3800}
-        height={3800}
-        alt="mnt1"
-      />
+    <Container theme={theme}>
+      <ContainerInner
+        ref={ref}
+        bg={parallaxbg}
+        scrollY={scrollY}
+        mouseMovmentX={mouseMovment.x}
+        mouseMovmentY={mouseMovment.y}
+      >
+        <Image
+          className="BgMountain"
+          src={parallaxbg}
+          width={3800}
+          height={3800}
+          alt="mnt1"
+        />
 
-      <Image
-        className="Mountain1"
-        src={mountainR}
-        width={1900}
-        height={2000}
-        alt="mnt1"
-      />
-      <Image
-        className="Mountain2"
-        src={mountainL2}
-        width={1900}
-        height={2000}
-        alt="mnt2"
-      />
-      {theme === "dark" ? (
-        <Fog theme={theme} scrollY={scrollY}>
-          <Image
-            // className="fog1"
-            src={blackClouds}
-            width={3800}
-            height={3800}
-            alt="fog"
-          />
-        </Fog>
-      ) : (
-        <Fog scrollY={scrollY}>
-          <Image
-            // className="fog1"
-            src={clouds}
-            width={3800}
-            height={3800}
-            alt="fog"
-          />
-        </Fog>
-      )}
+        <Image
+          className="Mountain1"
+          src={mountainR}
+          width={1900}
+          height={2000}
+          alt="mnt1"
+        />
+        <Image
+          className="Mountain2"
+          src={mountainL2}
+          width={1900}
+          height={2000}
+          alt="mnt2"
+        />
+        {theme === "dark" ? (
+          <Fog theme={theme} scrollY={scrollY}>
+            <Image
+              // className="fog1"
+              src={blackClouds}
+              width={3800}
+              height={3800}
+              alt="fog"
+            />
+          </Fog>
+        ) : (
+          <Fog scrollY={scrollY}>
+            <Image
+              // className="fog1"
+              src={clouds}
+              width={3800}
+              height={3800}
+              alt="fog"
+            />
+          </Fog>
+        )}
+      </ContainerInner>
     </Container>
   );
 };

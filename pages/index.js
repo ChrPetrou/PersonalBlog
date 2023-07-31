@@ -10,6 +10,7 @@ import Lottie from "components/common/Lottie";
 import Loading from "../public/animations/loading.json";
 import ParallaxaIntro from "components/ParallaxaIntro";
 import GernericContainer from "components/GernericContainer";
+import ParallaxIntroNew from "components/ParallaxIntroNew";
 
 const Container = styled.div`
   display: flex;
@@ -77,7 +78,8 @@ const BigCircle = styled.div`
 export default function Home() {
   return (
     <Container>
-      <ParallaxaIntro />
+      {/* <ParallaxaIntro /> */}
+      <ParallaxIntroNew />
       <GernericContainer>
         <AuthorIntro />
       </GernericContainer>
