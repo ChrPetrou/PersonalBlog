@@ -2,6 +2,7 @@ import colors from "configs/colors";
 import {
   blackFog,
   cloud,
+  clouds,
   fog,
   mountainL2,
   mountainR,
@@ -130,16 +131,39 @@ const Container = styled.div`
   }
   .cloud {
     position: absolute;
+  }
+`;
+
+const Fog = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  /* background-color: red; */
+  transition: all 1s linear;
+  top: ${({ scrollY }) => (scrollY > 50 ? "0%" : "120%")};
+  & img {
     object-fit: contain;
-    max-width: 200px;
-    max-height: 200px;
+    /* display: none; */
     width: 100%;
     height: 100%;
     left: 0;
     top: -10%;
     mix-blend-mode: ${({ theme }) => (theme == "dark" ? "" : "unset")};
   }
+  ::after {
+    content: "";
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    height: 40%;
+    background-color: transparent;
+    border-radius: 20% 20% 0 0;
+    box-shadow: 0px -220px 60px 0px rgb(241, 242, 244) inset;
+  }
 `;
+
 const ParallaxaIntro = () => {
   const [theme] = useTheme();
   const ref = useRef(null);
@@ -221,7 +245,7 @@ const ParallaxaIntro = () => {
         height={2000}
         alt="mnt2"
       />
-      {/* {theme === "dark" ? (
+      {theme === "dark" ? (
         <Image
           className="fog1"
           src={blackFog}
@@ -230,14 +254,16 @@ const ParallaxaIntro = () => {
           alt="fog"
         />
       ) : (
-        <Image
-          className="fog1"
-          src={fog}
-          width={3800}
-          height={3800}
-          alt="fog"
-        />
-      )} */}
+        <Fog scrollY={scrollY}>
+          <Image
+            className="fog1"
+            src={clouds}
+            width={3800}
+            height={3800}
+            alt="fog"
+          />
+        </Fog>
+      )}
     </Container>
   );
 };

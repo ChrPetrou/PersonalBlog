@@ -10,5 +10,6 @@ export const mountainL2 = "/assets/images/parallax/mountain4.png";
 export const mountainBottom = "/assets/images/parallax/mountainBtm.png";
 export const sunLight = "/assets/images/parallax/sunlight.png";
 export const fog = "/assets/images/parallax/fog.png";
+export const clouds = "/assets/images/parallax/clouds.png";
 export const cloud = "/assets/images/parallax/cloud.png";
 export const blackFog = "/assets/images/parallax/blackFog.png";
