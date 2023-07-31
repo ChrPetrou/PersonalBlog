@@ -138,9 +138,8 @@ const Fog = styled.div`
   top: 100%;
   /* top: ${({ scrollY }) => (scrollY > 10 ? `${-scrollY / 80}%` : "120%")}; */
   /* top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`}; */
-  transform: translateY(
-    ${({ scrollY }) => `calc(max(${-scrollY / 2}%, -100%))`}
-  );
+  transform: ${({ scrollY }) =>
+    `translateY(calc(max(${-scrollY / 2}%, -100%)))`};
   & img {
     position: absolute;
     object-fit: cover;
