@@ -13,7 +13,7 @@ const Container = styled.div`
   /* min-height: 100vh; */
   display: flex;
   background-color: ${({ theme }) =>
-    theme == "dark" ? " rgb(0 0 0 / 60%)" : "unset"};
+    theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
 
   & > p {
     color: ${({ theme }) => colors[theme].text};
@@ -31,7 +31,7 @@ const ContainerInner = styled.div`
   background-size: 120%;
   background-repeat: no-repeat;
   background-image: ${({ bg }) => `url(${bg})`};
-
+  mix-blend-mode: saturation;
   background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
     `calc(50%  + ${mouseMovmentX / 40}px)`};
   background-position-y: ${({ mouseMovmentY }) =>
@@ -41,22 +41,26 @@ const ContainerInner = styled.div`
 const Fog = styled.div`
   /* display: flex; */
   width: 100%;
-  height: 50%;
+  height: 100%;
+  /* min-height: 500px; */
   position: relative;
   left: 0;
-  /* z-index: 2; */
-  transition: 0.5s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
-  top: 100%;
+  z-index: 2;
+  transition: all 0.5s linear;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5 - 800}px,0px))`};
+
   /* transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`}; */
   & img {
-    position: absolute;
+    /* position: absolute; */
     object-fit: cover;
     width: 100%;
     height: 100%;
   }
   ::after {
     content: "";
-    /* position: relative; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
     margin-top: auto;
     width: 100%;
     height: 40%;
