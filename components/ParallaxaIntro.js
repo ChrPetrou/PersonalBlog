@@ -134,9 +134,13 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
   z-index: 2;
-  transition: 1s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  transition: 0.5s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  top: 100%;
   /* top: ${({ scrollY }) => (scrollY > 10 ? `${-scrollY / 80}%` : "120%")}; */
-  top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`};
+  /* top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`}; */
+  transform: translateY(
+    ${({ scrollY }) => `calc(max(${-scrollY / 5}%, -100%))`}
+  );
   & img {
     position: absolute;
     object-fit: cover;
@@ -195,7 +199,7 @@ const ParallaxaIntro = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(clamp(window.scrollY, 0, 120, 0, 240));
+      setScrollY(window.scrollY);
       setScrollDirection(window.scrollY > scrollY ? "down" : "up");
     };
 
