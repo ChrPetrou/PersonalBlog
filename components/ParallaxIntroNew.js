@@ -12,8 +12,6 @@ const Container = styled.div`
   overflow: hidden;
   /* min-height: 100vh; */
   display: flex;
-  background-color: ${({ theme }) =>
-    theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
 
   & > p {
     color: ${({ theme }) => colors[theme].text};
@@ -25,6 +23,8 @@ const Container = styled.div`
 const ContainerInner = styled.div`
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) =>
+    theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
   min-height: 100vh;
   transition: all 1s linear;
   background-attachment: fixed;
@@ -47,7 +47,7 @@ const Fog = styled.div`
   left: 0;
   z-index: 2;
   transition: all 0.5s linear;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5 - 800}px,0px))`};
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5 - 1200}px,0px))`};
 
   /* transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`}; */
   & img {
