@@ -21,7 +21,7 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   background-color: ${({ theme }) =>
-    theme == "dark" ? " rgb(0 0 0 / 50%)" : "unset"};
+    theme == "dark" ? " rgb(0 0 0 / 60%)" : "unset"};
 
   & > p {
     color: ${({ theme }) => colors[theme].text};
@@ -35,11 +35,12 @@ const Container = styled.div`
 
   ::after {
     content: "";
+    transition: all 1s linear;
     width: 100%;
     height: 100%;
     position: absolute;
     background-color: ${({ theme }) =>
-      theme == "dark" ? " rgb(0 0 0 / 60%)" : "unset"};
+      theme == "dark" ? " rgb(0 0 0 / 70%)" : "unset"};
   }
 
   .BgMountain {
@@ -63,23 +64,21 @@ const Container = styled.div`
   }
 
   .Mountain1 {
-    perspective: 1000000;
     mix-blend-mode: ${({ theme }) => (theme == "dark" ? "" : "unset")};
     transition: all 1s linear;
     position: absolute;
 
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(calc(-1%  + ${mouseMovmentX / 10}px), calc(-1%  + ${
-        mouseMovmentY / 3
+        mouseMovmentY / 10
       }px))`};
     object-fit: contain;
-    max-width: 1500px;
-    max-height: 950px;
+    max-width: 1200px;
+    max-height: 800px;
     width: 100%;
     height: 100%;
-    aspect-ratio: 1;
-    left: 40%;
-    top: 20%;
+    right: -10%;
+    bottom: -10%;
   }
   .Mountain2 {
     /* mix-blend-mode: hue; */
@@ -87,17 +86,16 @@ const Container = styled.div`
     transition: all 1s linear;
     position: absolute;
     object-fit: contain;
-    max-width: 1700px;
-    max-height: 1200px;
+    max-width: 1500px;
+    max-height: 1500px;
     width: 100%;
     height: 100%;
     transform: ${({ mouseMovmentX, mouseMovmentY }) =>
       `translate(max(calc(-2%  + ${mouseMovmentX / 5}px), 0px ), calc(-2%  + ${
         mouseMovmentY / 5
       }px))`};
-    aspect-ratio: 1;
-    right: 35%;
-    top: 20%;
+    left: -20%;
+    bottom: -40%;
   }
   .sunLight {
     position: absolute;
