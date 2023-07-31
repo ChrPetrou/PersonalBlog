@@ -130,12 +130,13 @@ const Container = styled.div`
 const Fog = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 120%;
   position: absolute;
   left: 0;
   z-index: 2;
-  transition: all 0.15s ease-in-out;
-  top: ${({ scrollY }) => (scrollY > 50 ? "0%" : "120%")};
+  transition: 1s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  /* top: ${({ scrollY }) => (scrollY > 10 ? `${-scrollY / 80}%` : "120%")}; */
+  top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`};
   & img {
     position: absolute;
     object-fit: cover;
@@ -164,6 +165,7 @@ const ParallaxaIntro = () => {
   const [scrollY, setScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState("down");
 
+  console.log(scrollY);
   const handleMouse = (e) => {
     if (ref.current) {
       let x = e.clientX - ref.current.clientWidth / 2; //check how far is mouse from the center of container in X axis
@@ -173,8 +175,6 @@ const ParallaxaIntro = () => {
         y: y,
       });
     }
-
-    console.log(mouseMovment);
   };
 
   const handleMouseLeave = () => {
@@ -184,7 +184,6 @@ const ParallaxaIntro = () => {
     if (ref.current) {
       ref.current.addEventListener("mousemove", (e) => handleMouse(e));
       ref.current.addEventListener("mouseleave", handleMouseLeave);
-      console.log(mouseMovment);
     }
     return () => {
       if (ref.current) {
@@ -196,7 +195,7 @@ const ParallaxaIntro = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      setScrollY(clamp(window.scrollY, 0, 120, 0, 240));
       setScrollDirection(window.scrollY > scrollY ? "down" : "up");
     };
 
