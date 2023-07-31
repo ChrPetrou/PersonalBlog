@@ -139,7 +139,7 @@ const Fog = styled.div`
   /* top: ${({ scrollY }) => (scrollY > 10 ? `${-scrollY / 80}%` : "120%")}; */
   /* top: ${({ scrollY }) => `${-scrollY * 5 + 1000}px`}; */
   transform: translateY(
-    ${({ scrollY }) => `calc(max(${-scrollY / 5}%, -100%))`}
+    ${({ scrollY }) => `calc(max(${-scrollY / 2}%, -100%))`}
   );
   & img {
     position: absolute;
