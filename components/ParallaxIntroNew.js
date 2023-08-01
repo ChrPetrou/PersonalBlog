@@ -11,9 +11,10 @@ const Container = styled.div`
   margin: auto;
   overflow: hidden;
   /* min-height: 100vh; */
-  display: flex;
-  background-color: ${({ theme }) =>
+  background: ${({ theme }) =>
     theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
+  display: flex;
+  /* z-index: -1; */
   & > p {
     color: ${({ theme }) => colors[theme].text};
   }
@@ -43,12 +44,12 @@ const Fog = styled.div`
   width: 100%;
   height: 100%;
   /* min-height: 500px; */
-  position: relative;
+  position: absolute;
   left: 0;
-  z-index: 2;
-  transition: all 0.15s linear;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 1200}px,0px))`};
 
+  transition: all 0.15s linear;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 2000}px,0px))`};
+  position: absolute;
   /* transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`}; */
   & img {
     /* position: absolute; */
@@ -69,8 +70,8 @@ const Fog = styled.div`
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 60px 0px rgb(17, 17, 17) inset;"
-        : "0px -220px 60px 0px rgb(241, 242, 244) inset;"};
+        ? "0px -220px 120px 0px rgb(17, 17, 17) inset;"
+        : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
   }
 `;
 
@@ -128,27 +129,26 @@ const ParallaxIntroNew = () => {
         scrollY={scrollY}
         mouseMovmentX={mouseMovment.x}
         mouseMovmentY={mouseMovment.y}
-      >
-        <Fog theme={theme} scrollY={scrollY}>
-          {theme === "dark" ? (
-            <Image
-              // className="fog1"
-              src={blackClouds}
-              width={3800}
-              height={3800}
-              alt="fog"
-            />
-          ) : (
-            <Image
-              // className="fog1"
-              src={clouds}
-              width={3800}
-              height={3800}
-              alt="fog"
-            />
-          )}
-        </Fog>
-      </ContainerInner>
+      ></ContainerInner>
+      <Fog theme={theme} scrollY={scrollY}>
+        {theme === "dark" ? (
+          <Image
+            // className="fog1"
+            src={blackClouds}
+            width={3800}
+            height={3800}
+            alt="fog"
+          />
+        ) : (
+          <Image
+            // className="fog1"
+            src={clouds}
+            width={3800}
+            height={3800}
+            alt="fog"
+          />
+        )}
+      </Fog>
     </Container>
   );
 };
