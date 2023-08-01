@@ -87,8 +87,8 @@ const Fog = styled.div`
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 120px 0px rgb(86 86 86) inset;"
-        : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
+        ? "0px -220px 90px 0px rgb(86 86 86) inset;"
+        : "0px -220px 90px 0px rgb(241, 242, 244) inset;"};
   }
 `;
 
