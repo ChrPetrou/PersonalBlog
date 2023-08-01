@@ -11,7 +11,7 @@ const Container = styled.div`
   margin: auto;
   overflow: hidden;
   background: ${({ theme }) =>
-    theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
+    theme == "dark" ? "rgb(17 17 17 / 80%)" : "unset"};
   display: flex;
   & > p {
     color: ${({ theme }) => colors[theme].text};
@@ -78,7 +78,7 @@ const Fog = styled.div`
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 120px 0px  rgb(87 87 87) inset;"
+        ? "0px -220px 120px 0px  rgb(14 14 14) inset;"
         : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
   }
 `;
