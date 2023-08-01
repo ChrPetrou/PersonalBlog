@@ -66,7 +66,6 @@ const Fog = styled.div`
   & img {
     z-index: 2;
 
-    filter: blur(2px);
     object-fit: contain;
     width: 100%;
     z-index: 10;
