@@ -1,5 +1,11 @@
 import colors from "configs/colors";
-import { blackClouds, clouds, parallaxbg } from "configs/images";
+import {
+  mountainL2,
+  clouds,
+  parallaxbg,
+  mountainR,
+  parallaxbg2,
+} from "configs/images";
 import Image from "next/image";
 import { useTheme } from "providers/ThemeProvider";
 import React, { useEffect, useRef } from "react";
@@ -22,8 +28,7 @@ const Container = styled.div`
 
 const ContainerInner = styled.div`
   width: 100%;
-  height: 100%;
-
+  height: 200%;
   min-height: 130vh;
   transition: background-position 1s linear;
   background-attachment: fixed;
@@ -32,9 +37,9 @@ const ContainerInner = styled.div`
   background-image: ${({ bg }) => `url(${bg})`};
   mix-blend-mode: saturation;
   background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
-    `calc(50%  + ${mouseMovmentX / 40}px)`};
+    `calc(20%  + ${mouseMovmentX / 40}px)`};
   background-position-y: ${({ mouseMovmentY }) =>
-    `calc(30%  + ${mouseMovmentY / 40}px)`};
+    `calc(70%  + ${mouseMovmentY / 40}px)`};
 `;
 
 const fadeIn = keyframes`
@@ -42,10 +47,57 @@ const fadeIn = keyframes`
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(20px);
+    transform: translateY(50px);
   }
   100% {
     transform:  translateY(0px);
+  }
+`;
+
+const FarMountain = styled.div`
+  display: flex;
+
+  position: absolute;
+  transition: background-position 1s linear;
+  left: -20%;
+  bottom: 20%;
+  height: auto;
+  width: 70%;
+
+  background-attachment: fixed;
+  /* background-size: 100%; */
+  background-image: ${({ bg }) => `url(${bg})`};
+  background-repeat: no-repeat;
+  /* background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
+    `calc(50%  + ${mouseMovmentX / 40}px)`};
+  background-position-y: ${({ mouseMovmentY }) =>
+    `calc(30%  + ${mouseMovmentY / 40}px)`}; */
+  & img {
+    width: 100%;
+    height: 100%;
+    /* min-height: 1200px; */
+    object-fit: cover;
+  }
+`;
+
+const CloseMountain = styled.div`
+  display: flex;
+
+  position: absolute;
+  transition: background-position 1s linear;
+  right: -5%;
+  bottom: 20%;
+  height: auto;
+  width: 50%;
+  background-attachment: fixed;
+  /* background-size: 100%; */
+  background-image: ${({ bg }) => `url(${bg})`};
+  background-repeat: no-repeat;
+  & img {
+    width: 100%;
+    height: 100%;
+    /* min-height: 1200px; */
+    object-fit: cover;
   }
 `;
 
@@ -55,8 +107,8 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
 
-  transition: 0.4s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 2000}px,0px))`};
+  transition: 0.15s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 50%,0px))`};
   position: absolute;
 
   & img {
@@ -66,6 +118,22 @@ const Fog = styled.div`
     height: 100%;
     animation: ${fadeIn} 10s infinite ease-in-out;
   }
+  ::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-top: auto;
+    width: 100%;
+    height: 60%;
+    filter: blur(30px);
+    background-color: rgb(241 242 244 / 90%);
+    border-radius: 20% 20% 0 0;
+    box-shadow: ${({ theme }) =>
+      theme === "dark"
+        ? "0px -220px 120px 0px  rgb(14 14 14) inset;"
+        : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
+  }
   ::after {
     content: "";
     position: absolute;
@@ -73,7 +141,8 @@ const Fog = styled.div`
     left: 0;
     margin-top: auto;
     width: 100%;
-    height: 40%;
+    height: 50%;
+    /* filter: blur(30px); */
     background-color: transparent;
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
@@ -133,28 +202,32 @@ const ParallaxIntroNew = () => {
       <ContainerInner
         theme={theme}
         ref={ref}
-        bg={parallaxbg}
+        bg={parallaxbg2}
         scrollY={scrollY}
         mouseMovmentX={mouseMovment.x}
         mouseMovmentY={mouseMovment.y}
       >
+        <CloseMountain
+          // bg={mountainL2}
+          scrollY={scrollY}
+          mouseMovmentX={mouseMovment.x}
+          mouseMovmentY={mouseMovment.y}
+        >
+          <Image src={mountainR} width={2500} height={1200} alt="fog" />
+        </CloseMountain>
+        <FarMountain
+          // bg={mountainL2}
+          scrollY={scrollY}
+          mouseMovmentX={mouseMovment.x}
+          mouseMovmentY={mouseMovment.y}
+        >
+          <Image src={mountainL2} width={2500} height={1200} alt="fog" />
+        </FarMountain>
         <Fog theme={theme} scrollY={scrollY}>
           {theme === "dark" ? (
-            <Image
-              // className="fog1"
-              src={clouds}
-              width={3800}
-              height={3800}
-              alt="fog"
-            />
+            <Image src={clouds} width={3800} height={3800} alt="fog" />
           ) : (
-            <Image
-              // className="fog1"
-              src={clouds}
-              width={3800}
-              height={3800}
-              alt="fog"
-            />
+            <Image src={clouds} width={3800} height={3800} alt="fog" />
           )}
         </Fog>
       </ContainerInner>
