@@ -4,17 +4,15 @@ import Image from "next/image";
 import { useTheme } from "providers/ThemeProvider";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   margin: auto;
   overflow: hidden;
-  /* min-height: 100vh; */
   background: ${({ theme }) =>
     theme == "dark" ? " rgb(0 0 0 / 80%)" : "unset"};
   display: flex;
-  /* z-index: -1; */
   & > p {
     color: ${({ theme }) => colors[theme].text};
   }
@@ -26,8 +24,8 @@ const ContainerInner = styled.div`
   width: 100%;
   height: 100%;
 
-  min-height: 120vh;
-  transition: all 1s linear;
+  min-height: 150vh;
+  transition: background-position 1s linear;
   background-attachment: fixed;
   background-size: 120%;
   background-repeat: no-repeat;
@@ -39,30 +37,49 @@ const ContainerInner = styled.div`
     `calc(30%  + ${mouseMovmentY / 40}px)`};
 `;
 
+const fadeIn = keyframes`
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform:  translateY(0px);
+  }
+`;
+
+const FarMountain = styled.div`
+  display: flex;
+`;
+
 const Fog = styled.div`
-  /* display: flex; */
   width: 100%;
   height: 100%;
-  /* min-height: 500px; */
   position: absolute;
   left: 0;
 
-  transition: all 0.15s linear;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 2000}px,0px))`};
+  transition: 0.4s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5 - 2000}px,0px))`};
   position: absolute;
-  /* transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`}; */
+
   & img {
-    /* position: absolute; */
     z-index: 2;
-    object-fit: cover;
+
+    filter: blur(2px);
+    object-fit: contain;
     width: 100%;
+    z-index: 10;
+    /* mix-blend-mode: hard-light; */
     height: 100%;
+    animation: ${fadeIn} 10s infinite ease-in-out;
   }
   ::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 2;
     margin-top: auto;
     width: 100%;
     height: 40%;
@@ -70,7 +87,7 @@ const Fog = styled.div`
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 120px 0px rgb(17, 17, 17) inset;"
+        ? "0px -220px 120px 0px rgb(86 86 86) inset;"
         : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
   }
 `;
@@ -129,26 +146,28 @@ const ParallaxIntroNew = () => {
         scrollY={scrollY}
         mouseMovmentX={mouseMovment.x}
         mouseMovmentY={mouseMovment.y}
-      ></ContainerInner>
-      <Fog theme={theme} scrollY={scrollY}>
-        {theme === "dark" ? (
-          <Image
-            // className="fog1"
-            src={blackClouds}
-            width={3800}
-            height={3800}
-            alt="fog"
-          />
-        ) : (
-          <Image
-            // className="fog1"
-            src={clouds}
-            width={3800}
-            height={3800}
-            alt="fog"
-          />
-        )}
-      </Fog>
+      >
+        <FarMountain></FarMountain>
+        <Fog theme={theme} scrollY={scrollY}>
+          {theme === "dark" ? (
+            <Image
+              // className="fog1"
+              src={clouds}
+              width={3800}
+              height={3800}
+              alt="fog"
+            />
+          ) : (
+            <Image
+              // className="fog1"
+              src={clouds}
+              width={3800}
+              height={3800}
+              alt="fog"
+            />
+          )}
+        </Fog>
+      </ContainerInner>
     </Container>
   );
 };
