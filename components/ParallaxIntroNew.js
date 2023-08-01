@@ -55,7 +55,7 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
 
-  transition: 0.15s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  transition: 0.4s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
   bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 2000}px,0px))`};
   position: absolute;
 
