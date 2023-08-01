@@ -24,7 +24,7 @@ const ContainerInner = styled.div`
   width: 100%;
   height: 100%;
 
-  min-height: 150vh;
+  min-height: 130vh;
   transition: background-position 1s linear;
   background-attachment: fixed;
   background-size: 120%;
@@ -49,27 +49,20 @@ const fadeIn = keyframes`
   }
 `;
 
-const FarMountain = styled.div`
-  display: flex;
-`;
-
 const Fog = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
 
-  transition: 0.4s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5 - 2000}px,0px))`};
+  transition: 0.15s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 2000}px,0px))`};
   position: absolute;
 
   & img {
     z-index: 2;
-
     object-fit: contain;
     width: 100%;
-    z-index: 10;
-    /* mix-blend-mode: hard-light; */
     height: 100%;
     animation: ${fadeIn} 10s infinite ease-in-out;
   }
@@ -78,7 +71,6 @@ const Fog = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 2;
     margin-top: auto;
     width: 100%;
     height: 40%;
@@ -86,8 +78,8 @@ const Fog = styled.div`
     border-radius: 20% 20% 0 0;
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 90px 0px rgb(86 86 86) inset;"
-        : "0px -220px 90px 0px rgb(241, 242, 244) inset;"};
+        ? "0px -220px 120px 0px  rgb(87 87 87) inset;"
+        : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
   }
 `;
 
@@ -146,7 +138,6 @@ const ParallaxIntroNew = () => {
         mouseMovmentX={mouseMovment.x}
         mouseMovmentY={mouseMovment.y}
       >
-        <FarMountain></FarMountain>
         <Fog theme={theme} scrollY={scrollY}>
           {theme === "dark" ? (
             <Image
