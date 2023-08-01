@@ -25,7 +25,7 @@ const ContainerInner = styled.div`
   width: 100%;
   height: 100%;
 
-  min-height: 100vh;
+  min-height: 120vh;
   transition: all 1s linear;
   background-attachment: fixed;
   background-size: 120%;
@@ -46,7 +46,7 @@ const Fog = styled.div`
   position: relative;
   left: 0;
   z-index: 2;
-  transition: all 0.5s linear;
+  transition: all 0.15s linear;
   bottom: ${({ scrollY }) => `calc(min(${scrollY * 10 - 1200}px,0px))`};
 
   /* transform: ${({ scrollY }) => `translateY(calc(${-scrollY / 2}%)))`}; */
