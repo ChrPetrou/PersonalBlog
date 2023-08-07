@@ -7,7 +7,7 @@ import { BsLightbulbFill, BsLightbulbOffFill } from "react-icons/bs";
 import navigations from "configs/navigations";
 const Navbar = styled.div`
   width: 100%;
-  position: fixed;
+  position: ${({ asPath }) => (asPath == "/" ? "fixed" : "sticky")};
   top: 0;
   z-index: 20;
   backdrop-filter: blur(5px);
@@ -143,7 +143,7 @@ const BlogNavbar = () => {
   const [theme, toggleTheme] = useTheme();
 
   return (
-    <Navbar>
+    <Navbar asPath={asPath}>
       <NavbarInner>
         {asPath !== "/" ? (
           <Link href={"/"}>

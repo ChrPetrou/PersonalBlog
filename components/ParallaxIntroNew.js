@@ -20,7 +20,9 @@ const Container = styled.div`
   background: ${({ theme }) =>
     theme == "dark" ? "rgb(17 17 17 / 80%)" : "unset"};
   display: flex;
-  & > p {
+  & p,
+  h1,
+  h2 {
     color: ${({ theme }) => colors[theme].text};
   }
 
@@ -29,6 +31,7 @@ const Container = styled.div`
 
 const ContainerInner = styled.div`
   width: 100%;
+
   height: 200%;
   min-height: 130vh;
   transition: background-position 1s linear;
@@ -41,6 +44,46 @@ const ContainerInner = styled.div`
     `calc(20%  + ${mouseMovmentX / 40}px)`};
   background-position-y: ${({ mouseMovmentY }) =>
     `calc(70%  + ${mouseMovmentY / 40}px)`};
+`;
+
+const fadeIn1 = keyframes`
+  from {
+    color: black;
+  }
+  to {
+    color: white;
+  }
+`;
+
+const TitleNSub = styled.div`
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  /* mix-blend-mode: color-burn; */
+  bottom: 0;
+
+  /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+    `translate(max(calc(-1%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
+      mouseMovmentY / 10
+    }px))`}; */
+  animation: ${fadeIn1} 2s linear forwards;
+  margin: auto;
+  transition: transform 1s linear;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & h2 {
+    font-size: 30px;
+  }
+  & h1 {
+    font-size: 60px;
+    font-weight: 900;
+  }
 `;
 
 const fadeIn = keyframes`
@@ -59,7 +102,7 @@ const FarMountain = styled.div`
   display: flex;
 
   position: absolute;
-  transition: background-position 1s linear;
+  transition: transform 1s linear;
   left: -20%;
   bottom: 10%;
   height: auto;
@@ -84,13 +127,13 @@ const CloseMountain = styled.div`
   display: flex;
 
   position: absolute;
-  transition: background-position 1s linear;
+  transition: transform 1s linear;
   right: -5%;
   height: auto;
-  width: 70%;
+  width: 75%;
   background-attachment: fixed;
   transition: all 1s linear;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 0%,-0%))`};
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 0%, 5%))`};
   /* background-size: 100%; */
   transform: ${({ mouseMovmentX, mouseMovmentY }) =>
     `translate(max(calc(-2%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
@@ -134,9 +177,10 @@ const Fog = styled.div`
     filter: blur(30px);
     background-color: rgb(241 242 244 / 90%);
     border-radius: 20% 20% 0 0;
+
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 120px 0px  rgb(14 14 14) inset;"
+        ? "0px -363px 139px -83px rgb(14 14 14) inset;"
         : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
   }
   ::after {
@@ -150,10 +194,12 @@ const Fog = styled.div`
     /* filter: blur(30px); */
     background-color: transparent;
     border-radius: 20% 20% 0 0;
+    /* 0 -363px 139px -83px rgb(14 14 14) inset */
+    /* 0px -300px 67px -56px rgb(14 14 14) inset */
     box-shadow: ${({ theme }) =>
       theme === "dark"
-        ? "0px -220px 120px 0px  rgb(14 14 14) inset;"
-        : "0px -220px 120px 0px rgb(241, 242, 244) inset;"};
+        ? "0px -220px 75px -65px rgb(14 14 14) inset"
+        : "0px -220px 75px -65px rgb(241, 242, 244) inset"};
   }
 `;
 
@@ -204,6 +250,10 @@ const ParallaxIntroNew = () => {
 
   return (
     <Container theme={theme}>
+      <TitleNSub mouseMovmentX={mouseMovment.x} mouseMovmentY={mouseMovment.y}>
+        <h1>Hi , I'm Chris</h1>
+        <h2>Full-Stack Developer</h2>
+      </TitleNSub>
       <ContainerInner
         theme={theme}
         ref={ref}
