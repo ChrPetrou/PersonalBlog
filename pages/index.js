@@ -8,7 +8,7 @@ import colors from "configs/colors";
 import blogsService from "backend/services/blog.service";
 import Lottie from "components/common/Lottie";
 import Loading from "../public/animations/loading.json";
-import ParallaxaIntro from "components/ParallaxaIntro";
+
 import GernericContainer from "components/GernericContainer";
 import ParallaxIntroNew from "components/ParallaxIntroNew";
 
@@ -78,7 +78,6 @@ const BigCircle = styled.div`
 export default function Home() {
   return (
     <Container>
-      {/* <ParallaxaIntro /> */}
       <ParallaxIntroNew />
       <GernericContainer>
         <AuthorIntro />
