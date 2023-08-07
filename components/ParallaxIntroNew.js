@@ -46,29 +46,15 @@ const ContainerInner = styled.div`
     `calc(70%  + ${mouseMovmentY / 40}px)`};
 `;
 
-const fadeIn1 = keyframes`
-  from {
-    color: ${colors.lightpurble};
-  }
-  to {
-    color: white;
-  }
-`;
-
 const TitleNSub = styled.div`
   position: absolute;
 
   left: 0;
   right: 0;
   top: 0;
-  /* mix-blend-mode: color-burn; */
+
   bottom: 0;
-  animation: ${fadeIn1} 2s linear forwards;
-  /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
-    `translate(max(calc(-1%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
-      mouseMovmentY / 10
-    }px))`}; */
-  animation: ${fadeIn1} 2s linear forwards;
+
   margin: auto;
   transition: transform 1s linear;
   width: 100%;
@@ -83,11 +69,6 @@ const TitleNSub = styled.div`
   & h1 {
     font-size: 60px;
     font-weight: 900;
-  }
-  & h2,
-  & h1 {
-    position: relative;
-    z-index: 3;
   }
 `;
 
