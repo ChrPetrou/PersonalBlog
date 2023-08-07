@@ -237,7 +237,7 @@ const ParallaxIntroNew = () => {
   return (
     <Container theme={theme}>
       <TitleNSub mouseMovmentX={mouseMovment.x} mouseMovmentY={mouseMovment.y}>
-        <h1>Hi , I'm Chris</h1>
+        <h1>{`Hi , I'm Chris`}</h1>
         <h2>Full-Stack Developer</h2>
       </TitleNSub>
       <ContainerInner
