@@ -15,7 +15,7 @@ import styled, { keyframes } from "styled-components";
 const Container = styled.div`
   width: 100%;
   margin: auto;
-  transition: background 0.4s linear;
+  transition: all 0.4s linear;
   overflow: hidden;
   background: ${({ theme }) =>
     theme == "dark" ? "rgb(17 17 17 / 80%)" : "unset"};
