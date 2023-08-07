@@ -43,8 +43,8 @@ const ContainerInner = styled.div`
   background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
     `calc(20%  + ${mouseMovmentX / 40}px)`};
   background-position-y: ${({ mouseMovmentY, scrollY }) =>
-    scrollY > 0
-      ? `calc(${scrollY / 2}%)`
+    scrollY !== 0
+      ? `calc(${scrollY / 2}%  + ${mouseMovmentY / 40}px )`
       : `calc(70%  + ${mouseMovmentY / 40}px)`};
 `;
 
@@ -211,6 +211,7 @@ const ParallaxIntroNew = () => {
   const handleMouseLeave = () => {
     setMouseMovment({ x: 0, y: 0 });
   };
+  console.log(scrollY);
   useEffect(() => {
     if (ref.current) {
       ref.current.addEventListener("mousemove", (e) => handleMouse(e));
