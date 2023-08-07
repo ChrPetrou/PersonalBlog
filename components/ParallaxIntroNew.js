@@ -40,11 +40,11 @@ const ContainerInner = styled.div`
   background-repeat: no-repeat;
   background-image: ${({ bg }) => `url(${bg})`};
   mix-blend-mode: saturation;
-  background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
+  background-position-x: ${({ mouseMovmentX }) =>
     `calc(20%  + ${mouseMovmentX / 40}px)`};
   background-position-y: ${({ mouseMovmentY, scrollY }) =>
     scrollY !== 0
-      ? `calc(${scrollY / 2}%  + ${mouseMovmentY / 40}px )`
+      ? `calc(70% - min(${scrollY / 2}px,200px)  + ${mouseMovmentY / 40}px )`
       : `calc(70%  + ${mouseMovmentY / 40}px)`};
 `;
 
@@ -91,13 +91,12 @@ const FarMountain = styled.div`
 
   position: absolute;
   transition: transform 1s linear;
-  left: -20%;
-  bottom: 10%;
+  left: -30%;
+  bottom: 20%;
   height: auto;
   width: 60%;
   transition: all 1s linear;
   background-attachment: fixed;
-
   background-image: ${({ bg }) => `url(${bg})`};
   background-repeat: no-repeat;
   transform: ${({ mouseMovmentX, mouseMovmentY }) =>
@@ -115,13 +114,13 @@ const CloseMountain = styled.div`
   display: flex;
 
   position: absolute;
-  transition: transform 1s linear;
+  transition: transform 0.15s linear;
   right: -5%;
   height: auto;
   width: 75%;
   background-attachment: fixed;
   transition: all 1s linear;
-  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 0%, 5%))`};
+  /* bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px , 50px))`}; */
   /* background-size: 100%; */
   transform: ${({ mouseMovmentX, mouseMovmentY }) =>
     `translate(max(calc(-2%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
@@ -143,7 +142,7 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
 
-  transition: 0.05s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  transition: transform 1s linear;
   bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 50%,0px))`};
   position: absolute;
 
@@ -278,7 +277,7 @@ const ParallaxIntroNew = () => {
           />
         </FarMountain>
         <Fog theme={theme} scrollY={scrollY}>
-          <Image src={clouds} width={3800} height={3800} alt="fog" />
+          <Image src={clouds} priority width={3800} height={3800} alt="fog" />
         </Fog>
       </ContainerInner>
     </Container>
