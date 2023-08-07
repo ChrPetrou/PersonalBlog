@@ -15,6 +15,7 @@ import styled, { keyframes } from "styled-components";
 const Container = styled.div`
   width: 100%;
   margin: auto;
+  transition: background 0.4s linear;
   overflow: hidden;
   background: ${({ theme }) =>
     theme == "dark" ? "rgb(17 17 17 / 80%)" : "unset"};
@@ -60,23 +61,22 @@ const FarMountain = styled.div`
   position: absolute;
   transition: background-position 1s linear;
   left: -20%;
-  bottom: 20%;
+  bottom: 10%;
   height: auto;
-  width: 70%;
-
+  width: 60%;
+  transition: all 1s linear;
   background-attachment: fixed;
-  /* background-size: 100%; */
+
   background-image: ${({ bg }) => `url(${bg})`};
   background-repeat: no-repeat;
-  /* background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
-    `calc(50%  + ${mouseMovmentX / 40}px)`};
-  background-position-y: ${({ mouseMovmentY }) =>
-    `calc(30%  + ${mouseMovmentY / 40}px)`}; */
+  transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+    `translate(max(calc(-1%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
+      mouseMovmentY / 10
+    }px))`};
   & img {
     width: 100%;
     height: 100%;
-    /* min-height: 1200px; */
-    object-fit: cover;
+    object-fit: contain;
   }
 `;
 
@@ -86,11 +86,16 @@ const CloseMountain = styled.div`
   position: absolute;
   transition: background-position 1s linear;
   right: -5%;
-  bottom: 20%;
   height: auto;
-  width: 50%;
+  width: 70%;
   background-attachment: fixed;
+  transition: all 1s linear;
+  bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 0%,-0%))`};
   /* background-size: 100%; */
+  transform: ${({ mouseMovmentX, mouseMovmentY }) =>
+    `translate(max(calc(-2%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
+      mouseMovmentY / 10
+    }px))`};
   background-image: ${({ bg }) => `url(${bg})`};
   background-repeat: no-repeat;
   & img {
@@ -107,7 +112,7 @@ const Fog = styled.div`
   position: absolute;
   left: 0;
 
-  transition: 0.15s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
+  transition: 0.05s cubic-bezier(0.52, 0.01, 0.16, 1) 0s;
   bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px - 50%,0px))`};
   position: absolute;
 
@@ -208,27 +213,33 @@ const ParallaxIntroNew = () => {
         mouseMovmentY={mouseMovment.y}
       >
         <CloseMountain
-          // bg={mountainL2}
           scrollY={scrollY}
           mouseMovmentX={mouseMovment.x}
           mouseMovmentY={mouseMovment.y}
         >
-          <Image src={mountainR} width={2500} height={1200} alt="fog" />
+          <Image
+            src={mountainR}
+            width={2500}
+            height={1200}
+            alt="fog"
+            priority
+          />
         </CloseMountain>
         <FarMountain
-          // bg={mountainL2}
           scrollY={scrollY}
           mouseMovmentX={mouseMovment.x}
           mouseMovmentY={mouseMovment.y}
         >
-          <Image src={mountainL2} width={2500} height={1200} alt="fog" />
+          <Image
+            src={mountainL2}
+            width={2500}
+            height={1200}
+            alt="fog"
+            priority
+          />
         </FarMountain>
         <Fog theme={theme} scrollY={scrollY}>
-          {theme === "dark" ? (
-            <Image src={clouds} width={3800} height={3800} alt="fog" />
-          ) : (
-            <Image src={clouds} width={3800} height={3800} alt="fog" />
-          )}
+          <Image src={clouds} width={3800} height={3800} alt="fog" />
         </Fog>
       </ContainerInner>
     </Container>
