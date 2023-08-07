@@ -118,6 +118,7 @@ const CloseMountain = styled.div`
   right: -5%;
   height: auto;
   width: 75%;
+  bottom: 10%;
   background-attachment: fixed;
   transition: all 1s linear;
   /* bottom: ${({ scrollY }) => `calc(min(${scrollY * 5}px , 50px))`}; */
