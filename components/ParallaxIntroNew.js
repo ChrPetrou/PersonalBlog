@@ -23,7 +23,7 @@ const Container = styled.div`
   & p,
   h1,
   h2 {
-    color: ${({ theme }) => colors[theme].text};
+    /* color: ${({ theme }) => colors[theme].text}; */
   }
 
   position: relative;
@@ -48,7 +48,7 @@ const ContainerInner = styled.div`
 
 const fadeIn1 = keyframes`
   from {
-    color: black;
+    color: ${colors.lightpurble};
   }
   to {
     color: white;
@@ -63,7 +63,7 @@ const TitleNSub = styled.div`
   top: 0;
   /* mix-blend-mode: color-burn; */
   bottom: 0;
-
+  animation: ${fadeIn1} 2s linear forwards;
   /* transform: ${({ mouseMovmentX, mouseMovmentY }) =>
     `translate(max(calc(-1%  + ${mouseMovmentX / 10}px), 0px ), calc(-2%  + ${
       mouseMovmentY / 10
@@ -83,6 +83,11 @@ const TitleNSub = styled.div`
   & h1 {
     font-size: 60px;
     font-weight: 900;
+  }
+  & h2,
+  & h1 {
+    position: relative;
+    z-index: 3;
   }
 `;
 
