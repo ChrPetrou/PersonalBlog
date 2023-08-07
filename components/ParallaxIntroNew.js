@@ -92,9 +92,9 @@ const FarMountain = styled.div`
   position: absolute;
   transition: transform 1s linear;
   left: -30%;
-  bottom: 20%;
+  bottom: 10%;
   height: auto;
-  width: 60%;
+  width: 65%;
   transition: all 1s linear;
   background-attachment: fixed;
   background-image: ${({ bg }) => `url(${bg})`};
