@@ -42,8 +42,10 @@ const ContainerInner = styled.div`
   mix-blend-mode: saturation;
   background-position-x: ${({ mouseMovmentX, mouseMovmentY }) =>
     `calc(20%  + ${mouseMovmentX / 40}px)`};
-  background-position-y: ${({ mouseMovmentY }) =>
-    `calc(70%  + ${mouseMovmentY / 40}px)`};
+  background-position-y: ${({ mouseMovmentY, scrollY }) =>
+    scrollY > 0
+      ? `calc(${scrollY / 2}%)`
+      : `calc(70%  + ${mouseMovmentY / 40}px)`};
 `;
 
 const TitleNSub = styled.div`
